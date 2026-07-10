@@ -14,7 +14,19 @@
 - ブラウザ完結の静的HTML/CSS/JavaScript
 - ビルド成果物: `dist/`
 
+## 推奨環境
+
+- Node.js: `>=24 <25`
+- npm: Node.js 24系に同梱されるnpm 11系
+
 ## ローカル確認
+
+ローカルのNode.jsとnpmのバージョンを確認します。
+
+```sh
+node -v
+npm -v
+```
 
 依存関係をインストールします。
 
