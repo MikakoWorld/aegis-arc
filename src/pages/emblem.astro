@@ -1,0 +1,1755 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/assets/img/favi.webp" type="image/webp" />
+    <link rel="alternate icon" href="/assets/img/favi.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="apple-mobile-web-app-title" content="アイギス・アーク" />
+    <meta name="theme-color" content="#edf4fb" />
+    <title>エンブレム作成 | アイギス・アーク</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #132033;
+        --muted: #607089;
+        --line: #cbd7e7;
+        --panel: #ffffff;
+        --page: #edf4fb;
+        --accent: #1d4f7a;
+        --accent-ink: #ffffff;
+        --focus: #c7983f;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        color: var(--ink);
+        background: var(--page);
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+      }
+
+      body.modal-open {
+        overflow: hidden;
+      }
+
+      button,
+      input,
+      select {
+        font: inherit;
+      }
+
+      button {
+        border: 0;
+        cursor: pointer;
+      }
+
+      .app {
+        display: grid;
+        grid-template-columns: minmax(320px, 410px) minmax(0, 1fr);
+        min-height: 100vh;
+      }
+
+      .controls {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        padding: 24px;
+        background: var(--panel);
+        border-right: 1px solid var(--line);
+        overflow-y: auto;
+      }
+
+      .brand {
+        display: grid;
+        grid-template-columns: 36px minmax(0, 1fr);
+        gap: 12px;
+        align-items: center;
+      }
+
+      .brand-mark {
+        display: block;
+        width: 36px;
+        height: auto;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(1.18rem, 1rem + 0.35vw, 1.38rem);
+        line-height: 1.12;
+        letter-spacing: 0;
+        white-space: nowrap;
+      }
+
+      .title-small {
+        margin-left: 0.22em;
+        font-size: 0.64em;
+      }
+
+      .meta {
+        grid-column: 1 / -1;
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.93rem;
+      }
+
+      .brand-note {
+        grid-column: 1 / -1;
+        margin: -4px 0 0;
+        color: var(--muted);
+        font-size: 0.93rem;
+      }
+
+      .guide-link {
+        grid-column: 1 / -1;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        justify-self: start;
+        color: #1d4f7a;
+        font-size: 0.9rem;
+        font-weight: 800;
+        text-decoration: none;
+        animation: guide-link-nudge 2.4s ease-in-out infinite;
+      }
+
+      .guide-link:hover {
+        color: #123a5d;
+        text-decoration: underline;
+      }
+
+      @keyframes guide-link-nudge {
+        0%,
+        72%,
+        100% {
+          transform: translateX(0);
+        }
+
+        80%,
+        92% {
+          transform: translateX(1px);
+        }
+
+        86% {
+          transform: translateX(0);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .guide-link {
+          animation: none;
+        }
+      }
+
+      fieldset {
+        display: grid;
+        gap: 12px;
+        margin: 0;
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #f9fbff;
+      }
+
+      legend {
+        padding: 0 6px;
+        color: #344054;
+        font-size: 0.9rem;
+        font-weight: 700;
+      }
+
+      .accordion-toggle {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        min-height: 30px;
+        padding: 0;
+        color: inherit;
+        background: transparent;
+        font-weight: 800;
+        text-align: left;
+      }
+
+      .accordion-icon {
+        display: none;
+        width: 24px;
+        height: 24px;
+        place-items: center;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        color: #475467;
+        background: #ffffff;
+        font-size: 1rem;
+        line-height: 1;
+      }
+
+      .accordion-panel {
+        display: grid;
+        gap: 12px;
+      }
+
+      label,
+      .label {
+        display: grid;
+        gap: 7px;
+        color: #344054;
+        font-size: 0.9rem;
+        font-weight: 650;
+      }
+
+      input[type="color"] {
+        width: 100%;
+        height: 44px;
+        padding: 4px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #ffffff;
+      }
+
+      input[type="range"] {
+        width: 100%;
+        accent-color: var(--accent);
+      }
+
+      input[type="file"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #ffffff;
+      }
+
+      select {
+        width: 100%;
+        min-height: 42px;
+        padding: 0 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        color: var(--ink);
+        background: #ffffff;
+      }
+
+      .row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .segmented {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 4px;
+        padding: 4px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #eef2f6;
+      }
+
+      .segmented input {
+        position: absolute;
+        inline-size: 1px;
+        block-size: 1px;
+        opacity: 0;
+      }
+
+      .segmented span {
+        display: grid;
+        min-height: 34px;
+        place-items: center;
+        border-radius: 6px;
+        color: #475467;
+        font-size: 0.88rem;
+        font-weight: 700;
+      }
+
+      .segmented input:checked + span {
+        color: #102a27;
+        background: #ffffff;
+        box-shadow: 0 1px 2px rgb(16 24 40 / 0.12);
+      }
+
+      .segmented.two {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .swatch-line {
+        display: grid;
+        grid-template-columns: 46px 1fr;
+        gap: 10px;
+        align-items: end;
+      }
+
+      .alpha-readout {
+        display: flex;
+        justify-content: space-between;
+        color: var(--muted);
+        font-size: 0.82rem;
+        font-weight: 600;
+      }
+
+      .notice {
+        margin: 0;
+        padding: 10px 12px;
+        border: 1px solid #fedf89;
+        border-radius: 8px;
+        color: #7a2e0e;
+        background: #fffaeb;
+        font-size: 0.85rem;
+        font-weight: 700;
+      }
+
+      .gradient-controls {
+        display: grid;
+        gap: 12px;
+      }
+
+      .gradient-controls[hidden],
+      .effect-controls[hidden],
+      .background-image-controls[hidden] {
+        display: none;
+      }
+
+      .background-image-controls {
+        display: grid;
+        gap: 12px;
+      }
+
+      .toggle-line {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        color: #344054;
+        font-size: 0.9rem;
+        font-weight: 700;
+      }
+
+      .toggle-line input {
+        width: 18px;
+        height: 18px;
+        accent-color: var(--accent);
+      }
+
+      .effect-controls {
+        display: grid;
+        gap: 12px;
+        padding: 12px;
+        border: 1px solid #e4e7ec;
+        border-radius: 8px;
+        background: #ffffff;
+      }
+
+      .actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .actions .wide {
+        grid-column: 1 / -1;
+      }
+
+      .button {
+        display: inline-grid;
+        min-height: 44px;
+        place-items: center;
+        border-radius: 8px;
+        font-weight: 800;
+      }
+
+      .button.primary {
+        color: var(--accent-ink);
+        background: var(--accent);
+      }
+
+      .button.secondary {
+        color: #26333f;
+        background: #e8eef6;
+      }
+
+      .report-link {
+        margin: -6px 0 0;
+        color: var(--muted);
+        font-size: 0.78rem;
+        line-height: 1.5;
+      }
+
+      .report-link a {
+        color: #1d4f7a;
+        font-weight: 800;
+        text-decoration: none;
+      }
+
+      .report-link a:hover {
+        text-decoration: underline;
+      }
+
+      .stage-wrap {
+        display: grid;
+        grid-template-rows: auto 1fr;
+        min-width: 0;
+        padding: 24px;
+      }
+
+      .toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 18px;
+      }
+
+      .status {
+        color: var(--muted);
+        font-size: 0.9rem;
+        font-weight: 650;
+      }
+
+      .canvas-shell {
+        display: grid;
+        min-height: 0;
+        place-items: center;
+        overflow: auto;
+        border: 1px solid #c9d0da;
+        border-radius: 8px;
+        background:
+          linear-gradient(45deg, #d8dde5 25%, transparent 25%),
+          linear-gradient(-45deg, #d8dde5 25%, transparent 25%),
+          linear-gradient(45deg, transparent 75%, #d8dde5 75%),
+          linear-gradient(-45deg, transparent 75%, #d8dde5 75%);
+        background-color: #f8fafc;
+        background-position:
+          0 0,
+          0 10px,
+          10px -10px,
+          -10px 0;
+        background-size: 20px 20px;
+      }
+
+      .preview-frame {
+        position: relative;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        width: min(var(--preview-width), 100%);
+        aspect-ratio: var(--preview-ratio);
+        box-shadow: 0 18px 55px rgb(16 24 40 / 0.22);
+      }
+
+      .preview-background-image {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background-position: center;
+        background-repeat: no-repeat;
+        pointer-events: none;
+      }
+
+      .preview-background-image[hidden] {
+        display: none;
+      }
+
+      .preview-background-color {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      .preview-foreground-color {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        pointer-events: none;
+      }
+
+      #preview {
+        position: relative;
+        z-index: 3;
+        display: block;
+        width: 72%;
+        max-height: 86%;
+        object-fit: contain;
+      }
+
+      .error {
+        color: #b42318;
+      }
+
+      .ios-save-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 30;
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+        padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
+        background: rgb(13 18 26 / 0.78);
+      }
+
+      .ios-save-modal[hidden] {
+        display: none;
+      }
+
+      .ios-save-modal-inner {
+        display: flex;
+        flex-direction: column;
+        width: min(100vw, 920px);
+        min-height: 100vh;
+        padding: 14px;
+        color: #ffffff;
+        background: #101418;
+      }
+
+      .ios-save-head {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .ios-save-head h2 {
+        margin: 0;
+        font-size: 1rem;
+        letter-spacing: 0;
+      }
+
+      .ios-save-close {
+        min-height: 40px;
+        padding: 0 14px;
+        border-radius: 8px;
+        color: #ffffff;
+        background: rgb(255 255 255 / 0.16);
+        font-weight: 800;
+      }
+
+      .ios-save-modal p {
+        margin: 10px 0 12px;
+        color: #d9dee7;
+        font-size: 0.9rem;
+      }
+
+      #iosSaveImage {
+        display: block;
+        width: 100%;
+        min-height: 0;
+        flex: 1;
+        object-fit: contain;
+        border: 1px solid rgb(255 255 255 / 0.18);
+        border-radius: 8px;
+        background:
+          linear-gradient(45deg, rgb(255 255 255 / 0.08) 25%, transparent 25%) 0 0 / 18px 18px,
+          linear-gradient(-45deg, rgb(255 255 255 / 0.08) 25%, transparent 25%) 0 0 / 18px 18px,
+          linear-gradient(45deg, transparent 75%, rgb(255 255 255 / 0.08) 75%) 0 0 / 18px 18px,
+          linear-gradient(-45deg, transparent 75%, rgb(255 255 255 / 0.08) 75%) 0 0 / 18px 18px,
+          #050608;
+      }
+
+      .scroll-jump {
+        display: none;
+      }
+
+      :focus-visible {
+        outline: 3px solid var(--focus);
+        outline-offset: 2px;
+      }
+
+      @media (max-width: 860px) {
+        .app {
+          grid-template-columns: 1fr;
+        }
+
+        .controls {
+          border-right: 0;
+          border-bottom: 1px solid var(--line);
+        }
+
+        .stage-wrap {
+          min-height: 60vh;
+          padding: 18px;
+        }
+      }
+
+      @media (max-width: 520px) {
+        .controls {
+          padding: 16px;
+        }
+
+        .brand {
+          grid-template-columns: 32px minmax(0, 1fr);
+          gap: 10px;
+        }
+
+        .brand-mark {
+          width: 32px;
+        }
+
+        h1 {
+          font-size: clamp(1.05rem, 5.2vw, 1.24rem);
+        }
+
+        label,
+        .label,
+        select,
+        input[type="file"] {
+          font-size: 1rem;
+        }
+
+        select {
+          min-height: 46px;
+        }
+
+        .segmented span {
+          min-height: 40px;
+          font-size: 1rem;
+        }
+
+        .row,
+        .actions {
+          grid-template-columns: 1fr;
+        }
+
+        .segmented:not(.two) {
+          grid-template-columns: 1fr;
+        }
+
+        .accordion legend {
+          width: 100%;
+          padding: 0;
+        }
+
+        .accordion-icon {
+          display: grid;
+        }
+
+        .accordion[data-collapsed="true"] .accordion-panel {
+          display: none;
+        }
+
+        .scroll-jump {
+          position: fixed;
+          right: max(14px, env(safe-area-inset-right));
+          bottom: max(14px, env(safe-area-inset-bottom));
+          z-index: 20;
+          display: inline-flex;
+          gap: 6px;
+          align-items: center;
+          min-height: 42px;
+          padding: 0 14px;
+          border: 1px solid rgb(15 118 110 / 0.3);
+          border-radius: 999px;
+          color: #ffffff;
+          background: rgb(15 118 110 / 0.94);
+          box-shadow: 0 10px 26px rgb(16 24 40 / 0.24);
+          font-size: 0.86rem;
+          font-weight: 800;
+          opacity: 1;
+          transform: translateY(0);
+          transition:
+            opacity 160ms ease,
+            transform 160ms ease;
+        }
+
+        .scroll-jump[hidden] {
+          display: inline-flex;
+          pointer-events: none;
+          opacity: 0;
+          transform: translateY(8px);
+        }
+
+        .scroll-jump-icon {
+          font-size: 1.08rem;
+          line-height: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="app">
+      <aside class="controls" aria-label="カスタマイズ設定">
+        <div class="brand">
+          <img class="brand-mark" src="/assets/img/only_emblem_black.svg" alt="" />
+          <h1>アイギス・アーク<span class="title-small">エンブレム</span></h1>
+          <p class="meta">SVGカラー、背景、書き出しサイズを調整できます。</p>
+          <p class="brand-note">好きな色にして遊んじゃおう。</p>
+          <a class="guide-link" href="/"><span aria-hidden="true">←</span><span>アイギス・アーク ガイドへ</span></a>
+        </div>
+
+        <fieldset class="accordion" data-collapsed="false">
+          <legend>
+            <button class="accordion-toggle" type="button" aria-expanded="true">
+              <span>エンブレム色</span>
+              <span class="accordion-icon" aria-hidden="true">-</span>
+            </button>
+          </legend>
+          <div class="accordion-panel">
+            <div class="label">
+              カラー方式
+              <div class="segmented" role="radiogroup" aria-label="カラー方式">
+                <label>
+                  <input type="radio" name="colorMode" value="solid" checked />
+                  <span>単色</span>
+                </label>
+                <label>
+                  <input type="radio" name="colorMode" value="linear" />
+                  <span>線形</span>
+                </label>
+                <label>
+                  <input type="radio" name="colorMode" value="radial" />
+                  <span>円形</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="swatch-line">
+              <input id="solidColor" type="color" value="#111827" aria-label="単色カラー" />
+              <label>
+                単色カラー
+                <select id="preset">
+                  <option value="custom">カスタム</option>
+                  <option value="#111827">墨黒</option>
+                  <option value="#0f766e">翡翠</option>
+                  <option value="#b45309">金銅</option>
+                  <option value="#be123c">深紅</option>
+                  <option value="#2563eb">蒼</option>
+                </select>
+              </label>
+            </div>
+
+            <div id="gradientControls" class="gradient-controls" hidden>
+              <div class="row">
+                <label>
+                  グラデーション始点
+                  <input id="gradientStart" type="color" value="#0f766e" />
+                </label>
+                <label>
+                  グラデーション終点
+                  <input id="gradientEnd" type="color" value="#f59e0b" />
+                </label>
+              </div>
+              <label id="angleControl">
+                角度
+                <input id="gradientAngle" type="range" min="0" max="360" value="35" />
+                <span class="alpha-readout"><span>0°</span><span id="angleValue">35°</span><span>360°</span></span>
+              </label>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="accordion" data-collapsed="false">
+          <legend>
+            <button class="accordion-toggle" type="button" aria-expanded="true">
+              <span>背景色・余白調整</span>
+              <span class="accordion-icon" aria-hidden="true">-</span>
+            </button>
+          </legend>
+          <div class="accordion-panel">
+            <div class="row">
+              <label>
+                比率
+                <select id="ratio">
+                  <option value="1:1">1:1</option>
+                  <option value="3:4">3:4</option>
+                  <option value="9:16" selected>9:16</option>
+                </select>
+              </label>
+              <label>
+                サイズ
+                <select id="size">
+                  <option value="S">S</option>
+                  <option value="M" selected>M</option>
+                  <option value="L">L</option>
+                  <option value="XL">XL</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="label">
+              背景タイプ
+              <div class="segmented two" role="radiogroup" aria-label="背景タイプ">
+                <label>
+                  <input type="radio" name="backgroundMode" value="color" checked />
+                  <span>色</span>
+                </label>
+                <label>
+                  <input type="radio" name="backgroundMode" value="image" />
+                  <span>画像</span>
+                </label>
+              </div>
+            </div>
+            <p id="backgroundImageNotice" class="notice" hidden>画像背景タイプはsvg非推奨です</p>
+            <label>
+              背景色
+              <input id="backgroundColor" type="color" value="#f8fafc" />
+            </label>
+            <label>
+              背景の透明度
+              <input id="backgroundAlpha" type="range" min="0" max="100" value="100" />
+              <span class="alpha-readout"><span>透明</span><span id="alphaValue">100%</span><span>不透明</span></span>
+            </label>
+            <div id="backgroundImageControls" class="background-image-controls" hidden>
+              <label>
+                背景画像
+                <input id="backgroundImage" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml" />
+                <span id="backgroundImageName" class="alpha-readout">画像が選択されていません</span>
+              </label>
+              <div class="row">
+                <div class="label">
+                  配置
+                  <div class="segmented" role="radiogroup" aria-label="背景画像の配置">
+                    <label>
+                      <input type="radio" name="backgroundImageFit" value="cover" checked />
+                      <span>切り抜き</span>
+                    </label>
+                    <label>
+                      <input type="radio" name="backgroundImageFit" value="contain" />
+                      <span>収める</span>
+                    </label>
+                    <label>
+                      <input type="radio" name="backgroundImageFit" value="stretch" />
+                      <span>全面</span>
+                    </label>
+                  </div>
+                </div>
+                <label>
+                  画像の透明度
+                  <input id="backgroundImageAlpha" type="range" min="0" max="100" value="100" />
+                  <span class="alpha-readout"><span>0%</span><span id="backgroundImageAlphaValue">100%</span><span>100%</span></span>
+                </label>
+              </div>
+              <div class="row">
+                <label>
+                  前景色
+                  <input id="foregroundColor" type="color" value="#ffffff" />
+                </label>
+                <label>
+                  前景色の透明度
+                  <input id="foregroundAlpha" type="range" min="0" max="100" value="0" />
+                  <span class="alpha-readout"><span>透明</span><span id="foregroundAlphaValue">0%</span><span>不透明</span></span>
+                </label>
+              </div>
+            </div>
+            <label>
+              エンブレム余白
+              <input id="padding" type="range" min="8" max="36" value="18" />
+              <span class="alpha-readout"><span>小</span><span id="paddingValue">18%</span><span>大</span></span>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="accordion" data-collapsed="true">
+          <legend>
+            <button class="accordion-toggle" type="button" aria-expanded="false">
+              <span>その他効果</span>
+              <span class="accordion-icon" aria-hidden="true">+</span>
+            </button>
+          </legend>
+          <div class="accordion-panel">
+            <label class="toggle-line">
+              <input id="shadowEnabled" type="checkbox" />
+              シャドウ
+            </label>
+            <div id="shadowControls" class="effect-controls" hidden>
+              <div class="row">
+                <label>
+                  色
+                  <input id="shadowColor" type="color" value="#000000" />
+                </label>
+                <label>
+                  透明度
+                  <input id="shadowAlpha" type="range" min="0" max="100" value="35" />
+                  <span class="alpha-readout"><span>0%</span><span id="shadowAlphaValue">35%</span><span>100%</span></span>
+                </label>
+              </div>
+              <label>
+                ぼかし
+                <input id="shadowBlur" type="range" min="0" max="60" value="12" />
+                <span class="alpha-readout"><span>0px</span><span id="shadowBlurValue">12px</span><span>60px</span></span>
+              </label>
+              <label>
+                範囲
+                <input id="shadowSpread" type="range" min="0" max="80" value="0" />
+                <span class="alpha-readout"><span>0px</span><span id="shadowSpreadValue">0px</span><span>80px</span></span>
+              </label>
+              <div class="row">
+                <label>
+                  距離
+                  <input id="shadowDistance" type="range" min="0" max="80" value="8" />
+                  <span class="alpha-readout"><span>0px</span><span id="shadowDistanceValue">8px</span><span>80px</span></span>
+                </label>
+                <label>
+                  角度
+                  <input id="shadowAngle" type="range" min="0" max="360" value="135" />
+                  <span class="alpha-readout"><span>0°</span><span id="shadowAngleValue">135°</span><span>360°</span></span>
+                </label>
+              </div>
+            </div>
+
+            <label class="toggle-line">
+              <input id="outlineEnabled" type="checkbox" />
+              フチ線
+            </label>
+            <div id="outlineControls" class="effect-controls" hidden>
+              <div class="row">
+                <label>
+                  色
+                  <input id="outlineColor" type="color" value="#ffffff" />
+                </label>
+                <label>
+                  透明度
+                  <input id="outlineAlpha" type="range" min="0" max="100" value="100" />
+                  <span class="alpha-readout"><span>0%</span><span id="outlineAlphaValue">100%</span><span>100%</span></span>
+                </label>
+              </div>
+              <label>
+                太さ
+                <input id="outlineWidth" type="range" min="1" max="60" value="12" />
+                <span class="alpha-readout"><span>1px</span><span id="outlineWidthValue">12px</span><span>60px</span></span>
+              </label>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="actions">
+          <button id="download" class="button primary" type="button">PNG保存</button>
+          <button id="downloadSvg" class="button secondary" type="button">SVG保存</button>
+          <button id="iosSave" class="button secondary" type="button">iPhone保存</button>
+          <button id="reset" class="button secondary wide" type="button">リセット</button>
+        </div>
+        <p class="report-link">不具合報告はサイト製作者 <a href="https://x.com/Mimmy_zeta001" target="_blank" rel="noreferrer">X</a> まで</p>
+      </aside>
+
+      <section class="stage-wrap" aria-label="プレビュー">
+        <div class="toolbar">
+          <div id="status" class="status">base.svgを読み込み中</div>
+          <div id="dimensions" class="status"></div>
+        </div>
+        <div class="canvas-shell">
+          <div id="frame" class="preview-frame">
+            <div id="backgroundImageLayer" class="preview-background-image" hidden></div>
+            <div id="backgroundColorLayer" class="preview-background-color"></div>
+            <div id="foregroundColorLayer" class="preview-foreground-color" hidden></div>
+            <img id="preview" alt="エンブレムプレビュー" />
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <button id="scrollJump" class="scroll-jump" type="button" hidden>
+      <span id="scrollJumpIcon" class="scroll-jump-icon" aria-hidden="true">↓</span>
+      <span id="scrollJumpText">プレビュー</span>
+    </button>
+
+    <div id="iosSaveModal" class="ios-save-modal" role="dialog" aria-modal="true" aria-labelledby="iosSaveTitle" hidden>
+      <div class="ios-save-modal-inner">
+        <div class="ios-save-head">
+          <h2 id="iosSaveTitle">iPhone 保存用画像</h2>
+          <button id="iosSaveClose" class="ios-save-close" type="button">閉じる</button>
+        </div>
+        <p>画像を長押しして写真アプリに保存できます。</p>
+        <img id="iosSaveImage" alt="保存用PNG" />
+      </div>
+    </div>
+
+    <script is:inline>
+      const sizeMap = {
+        S: { "1:1": [1024, 1024], "3:4": [768, 1024], "9:16": [720, 1280] },
+        M: { "1:1": [1600, 1600], "3:4": [1200, 1600], "9:16": [1080, 1920] },
+        L: { "1:1": [2400, 2400], "3:4": [1800, 2400], "9:16": [1440, 2560] },
+        XL: { "1:1": [3200, 3200], "3:4": [2400, 3200], "9:16": [2160, 3840] },
+      };
+
+      const defaults = {
+        mode: "solid",
+        solidColor: "#111827",
+        gradientStart: "#0f766e",
+        gradientEnd: "#f59e0b",
+        gradientAngle: 35,
+        ratio: "9:16",
+        size: "M",
+        backgroundMode: "color",
+        backgroundColor: "#f8fafc",
+        backgroundAlpha: 100,
+        backgroundImageFit: "cover",
+        backgroundImageAlpha: 100,
+        foregroundColor: "#ffffff",
+        foregroundAlpha: 0,
+        padding: 18,
+        shadowEnabled: false,
+        shadowColor: "#000000",
+        shadowAlpha: 35,
+        shadowBlur: 12,
+        shadowSpread: 0,
+        shadowDistance: 8,
+        shadowAngle: 135,
+        outlineEnabled: false,
+        outlineColor: "#ffffff",
+        outlineAlpha: 100,
+        outlineWidth: 12,
+      };
+
+      const shapeNames = ["path", "polygon", "rect", "circle", "ellipse", "line", "polyline"];
+      const mobileAccordionQuery = window.matchMedia("(max-width: 520px)");
+
+      const controls = {
+        preset: document.querySelector("#preset"),
+        solidColor: document.querySelector("#solidColor"),
+        gradientStart: document.querySelector("#gradientStart"),
+        gradientEnd: document.querySelector("#gradientEnd"),
+        gradientAngle: document.querySelector("#gradientAngle"),
+        gradientControls: document.querySelector("#gradientControls"),
+        angleControl: document.querySelector("#angleControl"),
+        angleValue: document.querySelector("#angleValue"),
+        ratio: document.querySelector("#ratio"),
+        size: document.querySelector("#size"),
+        backgroundColor: document.querySelector("#backgroundColor"),
+        backgroundAlpha: document.querySelector("#backgroundAlpha"),
+        alphaValue: document.querySelector("#alphaValue"),
+        backgroundImageControls: document.querySelector("#backgroundImageControls"),
+        backgroundImageNotice: document.querySelector("#backgroundImageNotice"),
+        backgroundImage: document.querySelector("#backgroundImage"),
+        backgroundImageName: document.querySelector("#backgroundImageName"),
+        backgroundImageAlpha: document.querySelector("#backgroundImageAlpha"),
+        backgroundImageAlphaValue: document.querySelector("#backgroundImageAlphaValue"),
+        foregroundColor: document.querySelector("#foregroundColor"),
+        foregroundAlpha: document.querySelector("#foregroundAlpha"),
+        foregroundAlphaValue: document.querySelector("#foregroundAlphaValue"),
+        padding: document.querySelector("#padding"),
+        paddingValue: document.querySelector("#paddingValue"),
+        shadowEnabled: document.querySelector("#shadowEnabled"),
+        shadowControls: document.querySelector("#shadowControls"),
+        shadowColor: document.querySelector("#shadowColor"),
+        shadowAlpha: document.querySelector("#shadowAlpha"),
+        shadowAlphaValue: document.querySelector("#shadowAlphaValue"),
+        shadowBlur: document.querySelector("#shadowBlur"),
+        shadowBlurValue: document.querySelector("#shadowBlurValue"),
+        shadowSpread: document.querySelector("#shadowSpread"),
+        shadowSpreadValue: document.querySelector("#shadowSpreadValue"),
+        shadowDistance: document.querySelector("#shadowDistance"),
+        shadowDistanceValue: document.querySelector("#shadowDistanceValue"),
+        shadowAngle: document.querySelector("#shadowAngle"),
+        shadowAngleValue: document.querySelector("#shadowAngleValue"),
+        outlineEnabled: document.querySelector("#outlineEnabled"),
+        outlineControls: document.querySelector("#outlineControls"),
+        outlineColor: document.querySelector("#outlineColor"),
+        outlineAlpha: document.querySelector("#outlineAlpha"),
+        outlineAlphaValue: document.querySelector("#outlineAlphaValue"),
+        outlineWidth: document.querySelector("#outlineWidth"),
+        outlineWidthValue: document.querySelector("#outlineWidthValue"),
+        reset: document.querySelector("#reset"),
+        download: document.querySelector("#download"),
+        downloadSvg: document.querySelector("#downloadSvg"),
+        iosSave: document.querySelector("#iosSave"),
+        iosSaveModal: document.querySelector("#iosSaveModal"),
+        iosSaveClose: document.querySelector("#iosSaveClose"),
+        iosSaveImage: document.querySelector("#iosSaveImage"),
+        scrollJump: document.querySelector("#scrollJump"),
+        scrollJumpIcon: document.querySelector("#scrollJumpIcon"),
+        scrollJumpText: document.querySelector("#scrollJumpText"),
+      };
+
+      const preview = document.querySelector("#preview");
+      const frame = document.querySelector("#frame");
+      const backgroundImageLayer = document.querySelector("#backgroundImageLayer");
+      const backgroundColorLayer = document.querySelector("#backgroundColorLayer");
+      const foregroundColorLayer = document.querySelector("#foregroundColorLayer");
+      const status = document.querySelector("#status");
+      const dimensions = document.querySelector("#dimensions");
+      const stageWrap = document.querySelector(".stage-wrap");
+
+      let baseSvg = "";
+      let currentObjectUrl = "";
+      let backgroundImageDataUrl = "";
+      let backgroundImageFileName = "";
+      let previousBackgroundMode = defaults.backgroundMode;
+
+      init();
+
+      async function init() {
+        try {
+          const response = await fetch("/base.svg", { cache: "no-store" });
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+          }
+          baseSvg = await response.text();
+          bindEvents();
+          setupAccordions();
+          render();
+        } catch (error) {
+          status.textContent = "base.svgを読み込めませんでした。ローカルサーバーから開いてください。";
+          status.classList.add("error");
+          controls.download.disabled = true;
+          controls.downloadSvg.disabled = true;
+          controls.iosSave.disabled = true;
+          console.error(error);
+        }
+      }
+
+      function bindEvents() {
+        document.querySelectorAll("input, select").forEach((control) => {
+          control.addEventListener("input", render);
+          control.addEventListener("change", render);
+        });
+
+        document.querySelectorAll('input[name="colorMode"]').forEach((radio) => {
+          radio.addEventListener("change", render);
+        });
+
+        document.querySelectorAll('input[name="backgroundMode"]').forEach((radio) => {
+          radio.addEventListener("change", handleBackgroundModeChange);
+        });
+
+        document.querySelectorAll('input[name="backgroundImageFit"]').forEach((radio) => {
+          radio.addEventListener("change", render);
+        });
+
+        controls.preset.addEventListener("change", () => {
+          if (controls.preset.value !== "custom") {
+            controls.solidColor.value = controls.preset.value;
+            render();
+          }
+        });
+
+        controls.solidColor.addEventListener("input", () => {
+          controls.preset.value = "custom";
+        });
+
+        controls.backgroundImage.addEventListener("change", handleBackgroundImageChange);
+
+        controls.reset.addEventListener("click", () => {
+          document.querySelector(`input[name="colorMode"][value="${defaults.mode}"]`).checked = true;
+          controls.solidColor.value = defaults.solidColor;
+          controls.gradientStart.value = defaults.gradientStart;
+          controls.gradientEnd.value = defaults.gradientEnd;
+          controls.gradientAngle.value = defaults.gradientAngle;
+          controls.ratio.value = defaults.ratio;
+          controls.size.value = defaults.size;
+          document.querySelector(`input[name="backgroundMode"][value="${defaults.backgroundMode}"]`).checked = true;
+          controls.backgroundColor.value = defaults.backgroundColor;
+          controls.backgroundAlpha.value = defaults.backgroundAlpha;
+          controls.backgroundImage.value = "";
+          document.querySelector(`input[name="backgroundImageFit"][value="${defaults.backgroundImageFit}"]`).checked = true;
+          controls.backgroundImageAlpha.value = defaults.backgroundImageAlpha;
+          controls.foregroundColor.value = defaults.foregroundColor;
+          controls.foregroundAlpha.value = defaults.foregroundAlpha;
+          backgroundImageDataUrl = "";
+          backgroundImageFileName = "";
+          previousBackgroundMode = defaults.backgroundMode;
+          controls.padding.value = defaults.padding;
+          controls.shadowEnabled.checked = defaults.shadowEnabled;
+          controls.shadowColor.value = defaults.shadowColor;
+          controls.shadowAlpha.value = defaults.shadowAlpha;
+          controls.shadowBlur.value = defaults.shadowBlur;
+          controls.shadowSpread.value = defaults.shadowSpread;
+          controls.shadowDistance.value = defaults.shadowDistance;
+          controls.shadowAngle.value = defaults.shadowAngle;
+          controls.outlineEnabled.checked = defaults.outlineEnabled;
+          controls.outlineColor.value = defaults.outlineColor;
+          controls.outlineAlpha.value = defaults.outlineAlpha;
+          controls.outlineWidth.value = defaults.outlineWidth;
+          controls.preset.value = defaults.solidColor;
+          render();
+        });
+
+        controls.download.addEventListener("click", downloadPng);
+        controls.downloadSvg.addEventListener("click", downloadSvg);
+        controls.iosSave.addEventListener("click", showIOSSaveImage);
+        controls.iosSaveClose.addEventListener("click", closeIOSSaveModal);
+        controls.iosSaveModal.addEventListener("click", (event) => {
+          if (event.target === controls.iosSaveModal) closeIOSSaveModal();
+        });
+        window.addEventListener("keydown", (event) => {
+          if (event.key === "Escape") closeIOSSaveModal();
+        });
+        controls.scrollJump.addEventListener("click", handleScrollJump);
+        window.addEventListener("scroll", updateScrollJump, { passive: true });
+        window.addEventListener("resize", updateScrollJump);
+      }
+
+      function handleBackgroundImageChange() {
+        const file = controls.backgroundImage.files[0];
+        if (!file) {
+          backgroundImageDataUrl = "";
+          backgroundImageFileName = "";
+          render();
+          return;
+        }
+
+        if (!file.type.startsWith("image/")) {
+          alert("画像ファイルを選択してください。");
+          controls.backgroundImage.value = "";
+          backgroundImageDataUrl = "";
+          backgroundImageFileName = "";
+          render();
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = () => {
+          backgroundImageDataUrl = String(reader.result);
+          backgroundImageFileName = file.name;
+          document.querySelector('input[name="backgroundMode"][value="image"]').checked = true;
+          controls.foregroundAlpha.value = 0;
+          previousBackgroundMode = "image";
+          render();
+        };
+        reader.onerror = () => {
+          alert("背景画像を読み込めませんでした。");
+          controls.backgroundImage.value = "";
+          backgroundImageDataUrl = "";
+          backgroundImageFileName = "";
+          render();
+        };
+        reader.readAsDataURL(file);
+      }
+
+      function handleBackgroundModeChange() {
+        const nextMode = document.querySelector('input[name="backgroundMode"]:checked').value;
+        if (nextMode === "image" && previousBackgroundMode !== "image") {
+          controls.foregroundAlpha.value = 0;
+        }
+        previousBackgroundMode = nextMode;
+        render();
+      }
+
+      function handleScrollJump() {
+        const target = controls.scrollJump.dataset.target;
+        if (target === "top") {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        } else {
+          stageWrap.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }
+
+      function updateScrollJump() {
+        if (!mobileAccordionQuery.matches) {
+          controls.scrollJump.hidden = true;
+          return;
+        }
+
+        const stageTop = stageWrap.getBoundingClientRect().top;
+        const nearTop = window.scrollY < 80;
+        const previewBelow = stageTop > window.innerHeight * 0.42;
+
+        controls.scrollJump.hidden = false;
+        if (nearTop || previewBelow) {
+          controls.scrollJump.dataset.target = "preview";
+          controls.scrollJump.setAttribute("aria-label", "プレビューまでスクロール");
+          controls.scrollJumpIcon.textContent = "↓";
+          controls.scrollJumpText.textContent = "プレビュー";
+        } else {
+          controls.scrollJump.dataset.target = "top";
+          controls.scrollJump.setAttribute("aria-label", "画面上部へ移動");
+          controls.scrollJumpIcon.textContent = "↑";
+          controls.scrollJumpText.textContent = "上へ";
+        }
+      }
+
+      function setupAccordions() {
+        document.querySelectorAll(".accordion").forEach((accordion) => {
+          const button = accordion.querySelector(".accordion-toggle");
+          button.addEventListener("click", () => {
+            const collapsed = accordion.dataset.collapsed === "true";
+            accordion.dataset.collapsed = String(!collapsed);
+            syncAccordionButton(accordion);
+            updateScrollJump();
+          });
+          syncAccordionButton(accordion);
+        });
+
+        const syncAllAccordions = () => {
+          document.querySelectorAll(".accordion").forEach(syncAccordionButton);
+          updateScrollJump();
+        };
+
+        if (mobileAccordionQuery.addEventListener) {
+          mobileAccordionQuery.addEventListener("change", syncAllAccordions);
+        } else {
+          mobileAccordionQuery.addListener(syncAllAccordions);
+        }
+      }
+
+      function syncAccordionButton(accordion) {
+        const collapsed = accordion.dataset.collapsed === "true";
+        const button = accordion.querySelector(".accordion-toggle");
+        const icon = accordion.querySelector(".accordion-icon");
+
+        button.setAttribute("aria-expanded", String(!collapsed || !mobileAccordionQuery.matches));
+        icon.textContent = collapsed ? "+" : "-";
+      }
+
+      function getState() {
+        return {
+          mode: document.querySelector('input[name="colorMode"]:checked').value,
+          solidColor: controls.solidColor.value,
+          gradientStart: controls.gradientStart.value,
+          gradientEnd: controls.gradientEnd.value,
+          gradientAngle: Number(controls.gradientAngle.value),
+          ratio: controls.ratio.value,
+          size: controls.size.value,
+          backgroundMode: document.querySelector('input[name="backgroundMode"]:checked').value,
+          backgroundColor: controls.backgroundColor.value,
+          backgroundAlpha: Number(controls.backgroundAlpha.value) / 100,
+          backgroundImage: backgroundImageDataUrl,
+          backgroundImageName: backgroundImageFileName,
+          backgroundImageFit: document.querySelector('input[name="backgroundImageFit"]:checked').value,
+          backgroundImageAlpha: Number(controls.backgroundImageAlpha.value) / 100,
+          foregroundColor: controls.foregroundColor.value,
+          foregroundAlpha: Number(controls.foregroundAlpha.value) / 100,
+          padding: Number(controls.padding.value),
+          shadowEnabled: controls.shadowEnabled.checked,
+          shadowColor: controls.shadowColor.value,
+          shadowAlpha: Number(controls.shadowAlpha.value) / 100,
+          shadowBlur: Number(controls.shadowBlur.value),
+          shadowSpread: Number(controls.shadowSpread.value),
+          shadowDistance: Number(controls.shadowDistance.value),
+          shadowAngle: Number(controls.shadowAngle.value),
+          outlineEnabled: controls.outlineEnabled.checked,
+          outlineColor: controls.outlineColor.value,
+          outlineAlpha: Number(controls.outlineAlpha.value) / 100,
+          outlineWidth: Number(controls.outlineWidth.value),
+        };
+      }
+
+      function render() {
+        if (!baseSvg) return;
+        const state = getState();
+        const [width, height] = sizeMap[state.size][state.ratio];
+        const ratioParts = state.ratio.split(":").map(Number);
+
+        controls.gradientControls.hidden = state.mode === "solid";
+        controls.angleControl.hidden = state.mode !== "linear";
+        controls.angleValue.textContent = `${state.gradientAngle}°`;
+        controls.alphaValue.textContent = `${Math.round(state.backgroundAlpha * 100)}%`;
+        controls.backgroundImageControls.hidden = state.backgroundMode !== "image";
+        controls.backgroundImageNotice.hidden = state.backgroundMode !== "image";
+        controls.backgroundImageName.textContent = state.backgroundImageName || "画像が選択されていません";
+        controls.backgroundImageAlphaValue.textContent = `${Math.round(state.backgroundImageAlpha * 100)}%`;
+        controls.foregroundAlphaValue.textContent = `${Math.round(state.foregroundAlpha * 100)}%`;
+        controls.paddingValue.textContent = `${state.padding}%`;
+        controls.shadowControls.hidden = !state.shadowEnabled;
+        controls.shadowAlphaValue.textContent = `${Math.round(state.shadowAlpha * 100)}%`;
+        controls.shadowBlurValue.textContent = `${state.shadowBlur}px`;
+        controls.shadowSpreadValue.textContent = `${state.shadowSpread}px`;
+        controls.shadowDistanceValue.textContent = `${state.shadowDistance}px`;
+        controls.shadowAngleValue.textContent = `${state.shadowAngle}°`;
+        controls.outlineControls.hidden = !state.outlineEnabled;
+        controls.outlineAlphaValue.textContent = `${Math.round(state.outlineAlpha * 100)}%`;
+        controls.outlineWidthValue.textContent = `${state.outlineWidth}px`;
+        dimensions.textContent = `${width} x ${height}px`;
+
+        frame.style.setProperty("--preview-ratio", `${ratioParts[0]} / ${ratioParts[1]}`);
+        frame.style.setProperty("--preview-width", getPreviewWidth(state.ratio));
+        frame.style.background = checkerBackground();
+        backgroundColorLayer.style.background = rgba(state.backgroundColor, state.backgroundAlpha);
+        updatePreviewBackgroundImage(state);
+        updatePreviewForegroundColor(state);
+        preview.style.width = `${100 - state.padding * 2}%`;
+
+        setPreviewSource(buildColoredSvg(state));
+        status.textContent = "プレビュー更新済み";
+        status.classList.remove("error");
+        requestAnimationFrame(updateScrollJump);
+      }
+
+      function buildColoredSvg(state) {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(baseSvg, "image/svg+xml");
+        const svg = doc.documentElement;
+        const parseError = doc.querySelector("parsererror");
+
+        if (parseError || svg.nodeName.toLowerCase() !== "svg") {
+          throw new Error("Invalid SVG");
+        }
+
+        svg.removeAttribute("width");
+        svg.removeAttribute("height");
+        svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+        const [viewX, viewY, viewWidth, viewHeight] = svg
+          .getAttribute("viewBox")
+          .split(/\s+/)
+          .map(Number);
+
+        const style = doc.createElementNS("http://www.w3.org/2000/svg", "style");
+        const fillSelector = shapeNames.map((name) => `.emblem-fill ${name}`).join(",");
+        const outlineSelector = shapeNames.map((name) => `.emblem-outline ${name}`).join(",");
+        style.textContent = `
+          ${fillSelector}{fill:var(--emblem-fill);stroke:none}
+          ${outlineSelector}{fill:none;stroke:var(--outline-color);stroke-opacity:var(--outline-opacity);stroke-width:var(--outline-width);stroke-linejoin:round;stroke-linecap:round}
+        `;
+        svg.insertBefore(style, svg.firstChild);
+        const defs = doc.createElementNS("http://www.w3.org/2000/svg", "defs");
+        svg.insertBefore(defs, style.nextSibling);
+
+        if (state.mode === "solid") {
+          svg.style.setProperty("--emblem-fill", state.solidColor);
+        } else {
+          const gradient =
+            state.mode === "linear"
+              ? doc.createElementNS("http://www.w3.org/2000/svg", "linearGradient")
+              : doc.createElementNS("http://www.w3.org/2000/svg", "radialGradient");
+
+          gradient.setAttribute("id", "emblemGradient");
+          gradient.setAttribute("gradientUnits", "userSpaceOnUse");
+          if (state.mode === "linear") {
+            const points = angleToPoints(state.gradientAngle, { viewX, viewY, viewWidth, viewHeight });
+            gradient.setAttribute("x1", points.x1);
+            gradient.setAttribute("y1", points.y1);
+            gradient.setAttribute("x2", points.x2);
+            gradient.setAttribute("y2", points.y2);
+          } else {
+            gradient.setAttribute("cx", round(viewX + viewWidth / 2));
+            gradient.setAttribute("cy", round(viewY + viewHeight * 0.46));
+            gradient.setAttribute("r", round(Math.max(viewWidth, viewHeight) * 0.68));
+          }
+
+          const start = doc.createElementNS("http://www.w3.org/2000/svg", "stop");
+          start.setAttribute("offset", "0%");
+          start.setAttribute("stop-color", state.gradientStart);
+
+          const end = doc.createElementNS("http://www.w3.org/2000/svg", "stop");
+          end.setAttribute("offset", "100%");
+          end.setAttribute("stop-color", state.gradientEnd);
+
+          gradient.append(start, end);
+          defs.append(gradient);
+          svg.style.setProperty("--emblem-fill", "url(#emblemGradient)");
+        }
+
+        const effectScale = getEffectScale(state, { viewX, viewY, viewWidth, viewHeight });
+        const outlineWidth = round(state.outlineWidth / effectScale);
+        const outlineMargin = state.outlineEnabled ? outlineWidth * 2 : 0;
+        let effectMargin = outlineMargin;
+        svg.style.setProperty("--outline-color", state.outlineColor);
+        svg.style.setProperty("--outline-opacity", state.outlineAlpha);
+        svg.style.setProperty("--outline-width", outlineWidth);
+
+        const graphic = doc.createElementNS("http://www.w3.org/2000/svg", "g");
+        graphic.setAttribute("class", "emblem-fill");
+        Array.from(svg.childNodes)
+          .filter((node) => node !== style && node !== defs)
+          .forEach((node) => graphic.appendChild(node));
+
+        const effectsGroup = doc.createElementNS("http://www.w3.org/2000/svg", "g");
+        if (state.shadowEnabled) {
+          const shadow = getShadowOffset(state);
+          const filter = doc.createElementNS("http://www.w3.org/2000/svg", "filter");
+          const blur = state.shadowBlur / effectScale;
+          const spread = state.shadowSpread / effectScale;
+          const dx = shadow.x / effectScale;
+          const dy = shadow.y / effectScale;
+          const margin = Math.max(Math.abs(dx), Math.abs(dy)) + spread + blur * 4 + outlineMargin;
+          const morphology = doc.createElementNS("http://www.w3.org/2000/svg", "feMorphology");
+          const gaussianBlur = doc.createElementNS("http://www.w3.org/2000/svg", "feGaussianBlur");
+          const offset = doc.createElementNS("http://www.w3.org/2000/svg", "feOffset");
+          const flood = doc.createElementNS("http://www.w3.org/2000/svg", "feFlood");
+          const composite = doc.createElementNS("http://www.w3.org/2000/svg", "feComposite");
+          const merge = doc.createElementNS("http://www.w3.org/2000/svg", "feMerge");
+          const shadowNode = doc.createElementNS("http://www.w3.org/2000/svg", "feMergeNode");
+          const sourceNode = doc.createElementNS("http://www.w3.org/2000/svg", "feMergeNode");
+
+          filter.setAttribute("id", "emblemShadow");
+          filter.setAttribute("filterUnits", "userSpaceOnUse");
+          filter.setAttribute("x", round(viewX - margin));
+          filter.setAttribute("y", round(viewY - margin));
+          filter.setAttribute("width", round(viewWidth + margin * 2));
+          filter.setAttribute("height", round(viewHeight + margin * 2));
+          morphology.setAttribute("in", "SourceAlpha");
+          morphology.setAttribute("operator", "dilate");
+          morphology.setAttribute("radius", round(spread));
+          morphology.setAttribute("result", "shadowSpread");
+          gaussianBlur.setAttribute("in", "shadowSpread");
+          gaussianBlur.setAttribute("stdDeviation", round(blur));
+          gaussianBlur.setAttribute("result", "shadowBlur");
+          offset.setAttribute("in", "shadowBlur");
+          offset.setAttribute("dx", round(dx));
+          offset.setAttribute("dy", round(dy));
+          offset.setAttribute("result", "shadowOffset");
+          flood.setAttribute("flood-color", state.shadowColor);
+          flood.setAttribute("flood-opacity", state.shadowAlpha);
+          flood.setAttribute("result", "shadowColor");
+          composite.setAttribute("in", "shadowColor");
+          composite.setAttribute("in2", "shadowOffset");
+          composite.setAttribute("operator", "in");
+          composite.setAttribute("result", "shadowPaint");
+          shadowNode.setAttribute("in", "shadowPaint");
+          sourceNode.setAttribute("in", "SourceGraphic");
+          merge.append(shadowNode, sourceNode);
+          filter.append(morphology, gaussianBlur, offset, flood, composite, merge);
+          defs.append(filter);
+          effectsGroup.setAttribute("filter", "url(#emblemShadow)");
+          effectMargin = Math.max(effectMargin, margin);
+        }
+
+        if (state.outlineEnabled) {
+          const outline = graphic.cloneNode(true);
+          outline.setAttribute("class", "emblem-outline");
+          effectsGroup.append(outline);
+        }
+        effectsGroup.append(graphic);
+        svg.append(effectsGroup);
+        if (effectMargin > 0) {
+          svg.setAttribute(
+            "viewBox",
+            `${round(viewX - effectMargin)} ${round(viewY - effectMargin)} ${round(viewWidth + effectMargin * 2)} ${round(viewHeight + effectMargin * 2)}`,
+          );
+        }
+
+        return new XMLSerializer().serializeToString(svg);
+      }
+
+      function getPreviewWidth(ratio) {
+        if (ratio === "9:16") return "430px";
+        if (ratio === "1:1") return "500px";
+        return "560px";
+      }
+
+      function updatePreviewBackgroundImage(state) {
+        if (state.backgroundMode !== "image" || !state.backgroundImage) {
+          backgroundImageLayer.hidden = true;
+          backgroundImageLayer.style.backgroundImage = "";
+          return;
+        }
+
+        backgroundImageLayer.hidden = false;
+        backgroundImageLayer.style.backgroundImage = `url("${state.backgroundImage}")`;
+        backgroundImageLayer.style.backgroundSize = getCssBackgroundSize(state.backgroundImageFit);
+        backgroundImageLayer.style.opacity = state.backgroundImageAlpha;
+      }
+
+      function updatePreviewForegroundColor(state) {
+        if (state.backgroundMode !== "image" || state.foregroundAlpha <= 0) {
+          foregroundColorLayer.hidden = true;
+          foregroundColorLayer.style.background = "";
+          return;
+        }
+
+        foregroundColorLayer.hidden = false;
+        foregroundColorLayer.style.background = rgba(state.foregroundColor, state.foregroundAlpha);
+      }
+
+      function getCssBackgroundSize(fit) {
+        if (fit === "contain") return "contain";
+        if (fit === "stretch") return "100% 100%";
+        return "cover";
+      }
+
+      function getSvgPreserveAspectRatio(fit) {
+        if (fit === "contain") return "xMidYMid meet";
+        if (fit === "stretch") return "none";
+        return "xMidYMid slice";
+      }
+
+      function getEffectScale(state, box) {
+        const [width, height] = sizeMap[state.size][state.ratio];
+        const paddingPixels = (Math.min(width, height) * state.padding) / 100;
+        const drawAreaWidth = width - paddingPixels * 2;
+        const drawAreaHeight = height - paddingPixels * 2;
+        return Math.min(drawAreaWidth / box.viewWidth, drawAreaHeight / box.viewHeight);
+      }
+
+      function getShadowOffset(state) {
+        const radians = ((state.shadowAngle - 90) * Math.PI) / 180;
+        return {
+          x: Math.cos(radians) * state.shadowDistance,
+          y: Math.sin(radians) * state.shadowDistance,
+        };
+      }
+
+      function angleToPoints(angle, box) {
+        const radians = ((angle - 90) * Math.PI) / 180;
+        const x = Math.cos(radians);
+        const y = Math.sin(radians);
+        const centerX = box.viewX + box.viewWidth / 2;
+        const centerY = box.viewY + box.viewHeight / 2;
+        const radius = Math.sqrt(box.viewWidth ** 2 + box.viewHeight ** 2) / 2;
+
+        return {
+          x1: round(centerX - x * radius),
+          y1: round(centerY - y * radius),
+          x2: round(centerX + x * radius),
+          y2: round(centerY + y * radius),
+        };
+      }
+
+      function setPreviewSource(svgText) {
+        if (currentObjectUrl) URL.revokeObjectURL(currentObjectUrl);
+        const blob = new Blob([svgText], { type: "image/svg+xml;charset=utf-8" });
+        currentObjectUrl = URL.createObjectURL(blob);
+        preview.src = currentObjectUrl;
+      }
+
+      async function downloadPng() {
+        const state = getState();
+        const canvas = await buildExportCanvas(state);
+
+        const link = document.createElement("a");
+        link.download = getFileName(state);
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+      }
+
+      function downloadSvg() {
+        const state = getState();
+        const svgText = buildExportSvg(state);
+        const blob = new Blob([svgText], { type: "image/svg+xml;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+
+        link.download = getFileName(state, "svg");
+        link.href = url;
+        link.click();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      }
+
+      async function showIOSSaveImage() {
+        try {
+          const state = getState();
+          const canvas = await buildExportCanvas(state);
+          controls.iosSaveImage.src = canvas.toDataURL("image/png");
+          controls.iosSaveModal.hidden = false;
+          document.body.classList.add("modal-open");
+        } catch (error) {
+          console.error(error);
+          alert("PNG化に失敗しました。");
+        }
+      }
+
+      function closeIOSSaveModal() {
+        controls.iosSaveModal.hidden = true;
+        document.body.classList.remove("modal-open");
+      }
+
+      function buildExportSvg(state) {
+        const [width, height] = sizeMap[state.size][state.ratio];
+        const emblemText = buildColoredSvg(state);
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(emblemText, "image/svg+xml");
+        const sourceSvg = doc.documentElement;
+        const [viewX, viewY, viewWidth, viewHeight] = sourceSvg
+          .getAttribute("viewBox")
+          .split(/\s+/)
+          .map(Number);
+        const paddingPixels = (Math.min(width, height) * state.padding) / 100;
+        const drawAreaWidth = width - paddingPixels * 2;
+        const drawAreaHeight = height - paddingPixels * 2;
+        const scale = Math.min(drawAreaWidth / viewWidth, drawAreaHeight / viewHeight);
+        const drawWidth = viewWidth * scale;
+        const drawHeight = viewHeight * scale;
+        const x = (width - drawWidth) / 2 - viewX * scale;
+        const y = (height - drawHeight) / 2 - viewY * scale;
+        const style = sourceSvg.getAttribute("style") || "";
+        const content = Array.from(sourceSvg.childNodes)
+          .map((node) => new XMLSerializer().serializeToString(node))
+          .join("");
+        const background = buildExportBackground(state, width, height);
+
+        return `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" style="${escapeAttribute(style)}">
+  ${background}
+  <g transform="translate(${round(x)} ${round(y)}) scale(${round(scale)})">
+    ${content}
+  </g>
+</svg>`;
+      }
+
+      function buildExportBackground(state, width, height) {
+        const layers = [];
+        if (state.backgroundAlpha > 0) {
+          layers.push(
+            `<rect width="100%" height="100%" fill="${state.backgroundColor}" fill-opacity="${state.backgroundAlpha}"/>`,
+          );
+        }
+
+        if (state.backgroundMode === "image" && state.backgroundImage) {
+          layers.push(
+            `<image href="${escapeAttribute(state.backgroundImage)}" width="${width}" height="${height}" preserveAspectRatio="${getSvgPreserveAspectRatio(state.backgroundImageFit)}" opacity="${state.backgroundImageAlpha}"/>`,
+          );
+        }
+
+        if (state.backgroundMode === "image" && state.foregroundAlpha > 0) {
+          layers.push(
+            `<rect width="100%" height="100%" fill="${state.foregroundColor}" fill-opacity="${state.foregroundAlpha}"/>`,
+          );
+        }
+
+        return layers.join("\n  ");
+      }
+
+      async function buildExportCanvas(state) {
+        const [width, height] = sizeMap[state.size][state.ratio];
+        const svgText = buildExportSvg(state);
+        const svgUrl = URL.createObjectURL(new Blob([svgText], { type: "image/svg+xml;charset=utf-8" }));
+
+        try {
+          const image = await loadImage(svgUrl);
+          const canvas = document.createElement("canvas");
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext("2d");
+
+          ctx.drawImage(image, 0, 0, width, height);
+          return canvas;
+        } finally {
+          URL.revokeObjectURL(svgUrl);
+        }
+      }
+
+      function getFileName(state, extension = "png") {
+        return `aegis-arc-emblem-${state.ratio.replace(":", "x")}-${state.size}.${extension}`;
+      }
+
+      function loadImage(src) {
+        return new Promise((resolve, reject) => {
+          const image = new Image();
+          image.onload = () => resolve(image);
+          image.onerror = reject;
+          image.src = src;
+        });
+      }
+
+      function rgba(hex, alpha) {
+        const value = hex.replace("#", "");
+        const r = parseInt(value.slice(0, 2), 16);
+        const g = parseInt(value.slice(2, 4), 16);
+        const b = parseInt(value.slice(4, 6), 16);
+        return `rgb(${r} ${g} ${b} / ${alpha})`;
+      }
+
+      function checkerBackground() {
+        return `
+          linear-gradient(45deg, rgb(88 94 105 / 0.24) 25%, transparent 25%) 0 0 / 18px 18px,
+          linear-gradient(-45deg, rgb(88 94 105 / 0.24) 25%, transparent 25%) 0 0 / 18px 18px,
+          linear-gradient(45deg, transparent 75%, rgb(88 94 105 / 0.24) 75%) 0 0 / 18px 18px,
+          linear-gradient(-45deg, transparent 75%, rgb(88 94 105 / 0.24) 75%) 0 0 / 18px 18px,
+          #f7f8fa
+        `;
+      }
+
+      function round(value) {
+        return Number(value.toFixed(4));
+      }
+
+      function escapeAttribute(value) {
+        return value
+          .replaceAll("&", "&amp;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;");
+      }
+    </script>
+  </body>
+</html>

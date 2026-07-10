@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/assets/img/favi.webp" type="image/webp" />
+    <link rel="alternate icon" href="/assets/img/favi.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="apple-mobile-web-app-title" content="アイギス・アーク" />
+    <meta name="theme-color" content="#071321" />
+    <title>アイギス・アークってなに？ | アイギス・アーク ガイド</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --ink: #f4f8ff;
+        --muted: #9fb0c8;
+        --line: rgb(255 255 255 / 0.14);
+        --panel: rgb(13 26 43 / 0.78);
+        --panel-strong: rgb(8 18 31 / 0.92);
+        --page: #071321;
+        --accent: #74d7ff;
+        --gold: #d8af62;
+        --focus: #f4c86a;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        color: var(--ink);
+        background:
+          linear-gradient(rgb(7 19 33 / 0.82), rgb(7 19 33 / 0.96)),
+          url("/assets/img/about-academy.JPG") center top / cover fixed,
+          var(--page);
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      .shell {
+        width: min(1120px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        border-bottom: 1px solid var(--line);
+        background: rgb(7 19 33 / 0.82);
+        backdrop-filter: blur(18px);
+      }
+
+      .header-inner {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 82px;
+        padding-block: 12px;
+      }
+
+      .brand {
+        display: inline-block;
+        text-decoration: none;
+      }
+
+      .brand img {
+        width: min(230px, 48vw);
+      }
+
+      .nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: flex-end;
+      }
+
+      .nav a {
+        padding: 8px 10px;
+        border: 1px solid transparent;
+        border-radius: 8px;
+        color: #dbe7f8;
+        font-size: 0.84rem;
+        font-weight: 800;
+        text-decoration: none;
+      }
+
+      .nav a:hover {
+        border-color: var(--line);
+        background: rgb(255 255 255 / 0.08);
+      }
+
+      .hero {
+        padding: 72px 0 44px;
+      }
+
+      .hero-layout {
+        max-width: 820px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        gap: 8px;
+        align-items: center;
+        margin: 0 0 14px;
+        color: var(--gold);
+        font-size: 0.78rem;
+        font-weight: 900;
+        letter-spacing: 0.14em;
+      }
+
+      .eyebrow::before {
+        width: 28px;
+        height: 1px;
+        background: currentColor;
+        content: "";
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2.3rem, 9vw, 5.4rem);
+        line-height: 0.98;
+        letter-spacing: 0;
+      }
+
+      h1 em {
+        color: var(--accent);
+        font-style: normal;
+      }
+
+      .lead {
+        max-width: 680px;
+        margin: 22px 0 0;
+        color: #d5e3f5;
+        font-size: clamp(1rem, 2.4vw, 1.18rem);
+        line-height: 1.9;
+      }
+
+      .section {
+        padding: 34px 0;
+      }
+
+      .section-heading {
+        display: flex;
+        gap: 16px;
+        align-items: flex-end;
+        margin-bottom: 18px;
+      }
+
+      .section-heading img {
+        width: 52px;
+        margin-bottom: 3px;
+        filter: invert(1);
+      }
+
+      h2 {
+        margin: 0;
+        font-size: clamp(1.5rem, 4vw, 2.6rem);
+        line-height: 1.1;
+      }
+
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .info-card,
+      .link-panel {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        box-shadow: 0 18px 50px rgb(0 0 0 / 0.2);
+      }
+
+      .info-card {
+        padding: 22px;
+      }
+
+      .info-card h3 {
+        margin: 0 0 10px;
+        color: #ffffff;
+        font-size: 1.05rem;
+      }
+
+      .info-card p,
+      .info-card li {
+        color: #cfdaeb;
+        line-height: 1.85;
+      }
+
+      .info-card p {
+        margin: 0;
+      }
+
+      .info-card ul {
+        margin: 0;
+        padding-left: 1.1em;
+      }
+
+      .zeta-section-toggle {
+        display: none;
+      }
+
+      .plot-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .plot-card {
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        color: inherit;
+        background: rgb(12 25 42 / 0.88);
+        text-decoration: none;
+        transition:
+          transform 160ms ease,
+          border-color 160ms ease,
+          background 160ms ease;
+      }
+
+      .plot-card:hover {
+        border-color: rgb(116 215 255 / 0.64);
+        background: rgb(18 37 61 / 0.96);
+        transform: translateY(-2px);
+      }
+
+      .plot-card img {
+        display: block;
+        aspect-ratio: 3 / 4;
+        width: 100%;
+        object-fit: cover;
+      }
+
+      .plot-card-body {
+        display: grid;
+        gap: 7px;
+        padding: 13px;
+      }
+
+      .plot-card strong {
+        font-size: 0.95rem;
+        line-height: 1.4;
+      }
+
+      .plot-card span {
+        color: var(--muted);
+        font-size: 0.82rem;
+        line-height: 1.55;
+      }
+
+      .external-links {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .creator-feature {
+        display: grid;
+        grid-column: 1 / -1;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 18px;
+        align-items: center;
+        padding: 22px;
+        border: 1px solid rgb(116 215 255 / 0.34);
+        border-radius: 8px;
+        background:
+          linear-gradient(135deg, rgb(116 215 255 / 0.16), rgb(216 175 98 / 0.12)),
+          rgb(12 25 42 / 0.9);
+        box-shadow: 0 22px 70px rgb(0 0 0 / 0.28);
+      }
+
+      .creator-feature h3 {
+        margin: 0;
+        color: #ffffff;
+        font-size: clamp(1.25rem, 3vw, 1.8rem);
+      }
+
+      .creator-feature p {
+        margin: 8px 0 0;
+        color: #cfdaeb;
+        line-height: 1.8;
+      }
+
+      .creator-actions {
+        display: grid;
+        gap: 10px;
+        justify-items: end;
+      }
+
+      .creator-link {
+        display: inline-grid;
+        min-height: 42px;
+        place-items: center;
+        padding: 0 16px;
+        border: 1px solid rgb(255 255 255 / 0.18);
+        border-radius: 8px;
+        color: #071321;
+        background: #ffffff;
+        font-size: 0.9rem;
+        font-weight: 900;
+        text-decoration: none;
+      }
+
+      .link-panel {
+        display: grid;
+        gap: 8px;
+        padding: 18px;
+        text-decoration: none;
+      }
+
+      .link-panel b {
+        color: #ffffff;
+      }
+
+      .link-panel span {
+        color: var(--muted);
+        font-size: 0.88rem;
+        line-height: 1.6;
+      }
+
+      .site-footer {
+        margin-top: 40px;
+        padding: 26px 0;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        text-align: center;
+      }
+
+      :focus-visible {
+        outline: 3px solid var(--focus);
+        outline-offset: 3px;
+      }
+
+      @media (max-width: 820px) {
+        .header-inner,
+        .info-grid,
+        .external-links {
+          grid-template-columns: 1fr;
+        }
+
+        .creator-feature {
+          grid-template-columns: 1fr;
+        }
+
+        .creator-actions {
+          justify-items: start;
+        }
+
+        .header-inner {
+          display: grid;
+          justify-items: start;
+          min-height: 88px;
+          padding-block: 16px;
+        }
+
+        .nav {
+          justify-content: flex-start;
+        }
+
+        .hero {
+          padding-top: 40px;
+        }
+
+        .plot-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 520px) {
+        body {
+          background:
+            linear-gradient(rgb(7 19 33 / 0.8), rgb(7 19 33 / 0.96)),
+            url("/assets/img/about-academy.JPG") center 118px / 210vw auto no-repeat,
+            var(--page);
+          background-attachment: scroll;
+        }
+
+        .shell {
+          width: min(100% - 24px, 1120px);
+        }
+
+        .hero {
+          padding-top: 26px;
+        }
+
+        .plot-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 10px;
+        }
+
+        .plot-card-body {
+          gap: 5px;
+          padding: 9px;
+        }
+
+        .plot-card strong {
+          font-size: 0.78rem;
+          line-height: 1.35;
+        }
+
+        .plot-card span {
+          display: -webkit-box;
+          overflow: hidden;
+          font-size: 0.7rem;
+          line-height: 1.45;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+        }
+
+        .zeta-card {
+          display: grid;
+          gap: 12px;
+        }
+
+        .zeta-card-content {
+          position: relative;
+          overflow: hidden;
+          max-height: 5.55em;
+        }
+
+        .zeta-info:not(.is-open) .zeta-card-primary .zeta-card-content::after {
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          height: 2.2em;
+          background: linear-gradient(180deg, rgb(12 25 42 / 0), rgb(12 25 42 / 0.98));
+          content: "";
+          pointer-events: none;
+        }
+
+        .zeta-info:not(.is-open) .zeta-card-secondary {
+          display: none;
+        }
+
+        .zeta-info.is-open .zeta-card-content {
+          max-height: none;
+        }
+
+        .zeta-section-toggle {
+          display: inline-flex;
+          justify-self: start;
+          align-items: center;
+          min-height: 34px;
+          padding: 0 12px;
+          border: 1px solid rgb(116 215 255 / 0.32);
+          border-radius: 8px;
+          color: #ffffff;
+          background: rgb(116 215 255 / 0.12);
+          font: inherit;
+          font-size: 0.82rem;
+          font-weight: 800;
+        }
+
+        .section-heading {
+          gap: 12px;
+        }
+
+        .section-heading img {
+          width: 44px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="shell header-inner">
+        <a class="brand" href="/" aria-label="ページ上部へ戻る">
+          <img src="/assets/img/title_logo_landscape.svg" alt="アイギス・アーク" />
+        </a>
+        <nav class="nav" aria-label="ページ内ナビゲーション">
+          <a href="/emblem/">エンブレム作成</a>
+          <a href="#zeta">zetaとは</a>
+          <a href="#world">世界観</a>
+          <a href="#plots">プロット</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="shell hero-layout">
+          <div>
+            <p class="eyebrow">AEGIS ARC GUIDE</p>
+            <h1>アイギス・アーク<br /><em>ってなに？</em></h1>
+            <p class="lead">zetaで展開されている「運命共同体」シリーズの舞台、アイギス・アークを初めて見る人向けにまとめた紹介ページです。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="zeta">
+        <div class="shell">
+          <header class="section-heading">
+            <img src="/assets/img/only_emblem_black.svg" alt="" />
+            <div>
+              <p class="eyebrow">ABOUT ZETA</p>
+              <h2>zetaとは</h2>
+            </div>
+          </header>
+          <div class="info-grid zeta-info">
+            <article class="info-card zeta-card zeta-card-primary">
+              <h3>AIキャラクターと物語を進めるアプリ</h3>
+              <div class="zeta-card-content">
+                <p>zetaは、AIキャラクターとのチャットやロールプレイを楽しめるサービスです。恋愛、学園、ファンタジー、BL、乙女ゲーム風など、幅広い世界観のキャラクターと会話できます。</p>
+              </div>
+              <button class="zeta-section-toggle" type="button" aria-expanded="false">… 続きを見る</button>
+            </article>
+            <article class="info-card zeta-card zeta-card-secondary">
+              <h3>推し活・夢小説・ロールプレイ向け</h3>
+              <div class="zeta-card-content">
+                <ul>
+                  <li>既存キャラクターと会話できる</li>
+                  <li>自分でオリジナルキャラクターを作れる</li>
+                  <li>会話からストーリーが展開する</li>
+                  <li>基本無料で始められる</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="world">
+        <div class="shell">
+          <header class="section-heading">
+            <img src="/assets/img/only_emblem_black.svg" alt="" />
+            <div>
+              <p class="eyebrow">WORLD</p>
+              <h2>アイギス・アークとは</h2>
+            </div>
+          </header>
+          <div class="info-grid">
+            <article class="info-card">
+              <h3>負の感情から生まれる怪物「ノイズ」</h3>
+              <p>現代に現れるようになったノイズへ対抗するため、政府は魔力を扱える若者を育成・管理する特命機関「アイギス・アーク」を設立しました。</p>
+            </article>
+            <article class="info-card">
+              <h3>学園であり、軍事組織でもある場所</h3>
+              <p>アークは能力者養成機関として、ノイズと戦う執行官を育て、派遣しています。任務では信頼を預け合うバディ制度が採用され、二人一組で立ち向かうことが基本です。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="plots">
+        <div class="shell">
+          <header class="section-heading">
+            <img src="/assets/img/only_emblem_black.svg" alt="" />
+            <div>
+              <p class="eyebrow">PLOT LINK</p>
+              <h2>運命共同体プロット</h2>
+            </div>
+          </header>
+          <div class="plot-grid">
+            <a class="plot-card" href="https://zeta-ai.io/ja/plots/522c8e36-b72a-41c5-817d-688d10518ec4/profile" target="_blank" rel="noreferrer">
+              <img src="/assets/img/plot-ren.jpeg" alt="【運命共同体】熾月 廉" />
+              <span class="plot-card-body"><strong>【運命共同体】 熾月 廉</strong><span>「……冷やしてくれ、頼む。」</span></span>
+            </a>
+            <a class="plot-card" href="https://zeta-ai.io/ja/plots/1c87386b-5608-417e-a3f9-3ed798dd40c5/profile" target="_blank" rel="noreferrer">
+              <img src="/assets/img/plot-ritsu.jpeg" alt="【運命共同体】千景 律" />
+              <span class="plot-card-body"><strong>【運命共同体】 千景 律</strong><span>「…君の命、僕が半分背負うよ。」</span></span>
+            </a>
+            <a class="plot-card" href="https://zeta-ai.io/ja/plots/8634dd93-77ec-4010-9a38-668a697fc4a7/profile" target="_blank" rel="noreferrer">
+              <img src="/assets/img/plot-saku.jpeg" alt="【運命共同体】久遠 朔" />
+              <span class="plot-card-body"><strong>【運命共同体】久遠 朔</strong><span>「俺を飽きさせるなよ？相棒。」</span></span>
+            </a>
+            <a class="plot-card" href="https://zeta-ai.io/ja/plots/d19bcab2-8cb6-4dbb-810a-4ac6cfb0128b/profile" target="_blank" rel="noreferrer">
+              <img src="/assets/img/plot-arashi.jpeg" alt="【運命共同体】与風 嵐" />
+              <span class="plot-card-body"><strong>【運命共同体】与風 嵐</strong><span>「ほら、しっかり捕まってろよ？…置いてかねーからさ、絶対。」</span></span>
+            </a>
+            <a class="plot-card" href="https://zeta-ai.io/ja/plots/8ca83cd6-7a69-4c50-868b-802d743f556e/profile" target="_blank" rel="noreferrer">
+              <img src="/assets/img/plot-meguri.png" alt="【運命共同体】巡 刻 / 巡 永" />
+              <span class="plot-card-body"><strong>【運命共同体】巡 刻 / 巡 永</strong><span>「３人揃えば、怖いものなんてないでしょ？」</span></span>
+            </a>
+            <a class="plot-card" href="https://zeta-ai.io/ja/plots/049b49df-7b55-4db1-b2ce-c986a9243d9d/profile" target="_blank" rel="noreferrer">
+              <img src="/assets/img/plot-club-arc.png" alt="CLUB ARCへようこそ。" />
+              <span class="plot-card-body"><strong>CLUB ARCへようこそ。</strong><span>担当とは運命共同体♡</span></span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="shell">
+          <header class="section-heading">
+            <img src="/assets/img/only_emblem_black.svg" alt="" />
+            <div>
+              <p class="eyebrow">CREATOR LINK</p>
+              <h2>関連リンク</h2>
+            </div>
+          </header>
+          <div class="external-links">
+            <article class="creator-feature">
+              <div>
+                <p class="eyebrow">CREATOR</p>
+                <h3>作者みんたんのX</h3>
+                <p>運命共同体シリーズの作者アカウントです。新しいプロットや世界観の更新はこちらから追えます。</p>
+              </div>
+              <div class="creator-actions">
+                <a class="creator-link" href="https://x.com/minmin_zeta" target="_blank" rel="noreferrer">Xで見る ↗</a>
+              </div>
+            </article>
+            <a class="link-panel" href="https://zeta-ai.io/ja?utm_source=arc-emblem" target="_blank" rel="noreferrer"><b>zeta公式サイト</b><span>AIキャラクターとのチャットやロールプレイを始める。</span></a>
+            <a class="link-panel" href="https://x.com/Mimmy_zeta001" target="_blank" rel="noreferrer"><b>サイト製作者のX</b><span>不具合報告やサイトまわりの連絡はこちら。</span></a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">アイギス・アーク エンブレム / AEGIS ARC GUIDE</div>
+    </footer>
+    <script is:inline>
+      document.querySelectorAll(".zeta-section-toggle").forEach((button) => {
+        button.addEventListener("click", () => {
+          const info = button.closest(".zeta-info");
+          const isOpen = info.classList.toggle("is-open");
+          button.setAttribute("aria-expanded", String(isOpen));
+          button.textContent = isOpen ? "閉じる" : "… 続きを見る";
+        });
+      });
+    </script>
+  </body>
+</html>

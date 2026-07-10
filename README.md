@@ -1,24 +1,76 @@
-# アイギス・アーク ガイド
+# アイギス・アーク
 
-zetaで展開されている「運命共同体」シリーズの舞台、アイギス・アークを紹介する静的HTMLページです。
+アイギス・アークの紹介ページをトップに置き、別ページで単色SVGのエンブレムをカスタマイズできるAstro製の静的サイトです。
+
+## 主なページ
+
+- `/`: アイギス・アークとzetaの概要、プロットリンク
+- `/emblem/`: `base.svg`の単色カラー変更と画像書き出し
+
+## 技術構成
+
+- Astro
+- Cloudflare Pages
+- ブラウザ完結の静的HTML/CSS/JavaScript
+- ビルド成果物: `dist/`
+
+## ローカル確認
+
+依存関係をインストールします。
+
+```sh
+npm install
+```
+
+開発サーバーを起動します。
+
+```sh
+npm run dev
+```
+
+ブラウザで開く:
+
+```text
+http://localhost:4321/
+```
+
+本番ビルド:
+
+```sh
+npm run build
+```
+
+ビルド結果の確認:
+
+```sh
+npm run preview
+```
+
+## Cloudflare Pages設定
+
+| 項目 | 設定値 |
+| --- | --- |
+| Project name | `aegis-arc` |
+| Production branch | `main` |
+| Framework preset | `Astro` |
+| Build command | `npm run build` |
+| Build output directory | `dist` |
+| Root directory | 未設定 |
 
 ## ファイル構成
 
 ```text
 .
-├── index.html
-├── about.html
-├── manifest.webmanifest
-└── assets/
-    └── img/
+├── astro.config.mjs
+├── package.json
+├── package-lock.json
+├── public/
+│   ├── base.svg
+│   ├── manifest.webmanifest
+│   └── assets/
+│       └── img/
+└── src/
+    └── pages/
+        ├── index.astro
+        └── emblem.astro
 ```
-
-## ローカル確認
-
-`about.html` をブラウザで開くだけで確認できます。
-
-```text
-about.html
-```
-
-GitHub Pagesなどで公開する場合は、リポジトリのルートを公開ディレクトリに指定します。
