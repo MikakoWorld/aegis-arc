@@ -69,6 +69,25 @@ npm run preview
 | Build output directory | `dist` |
 | Root directory | 未設定 |
 
+## デプロイ
+
+Cloudflare Pagesは、`main`ブランチへのpushをきっかけにデプロイされます。
+
+push前に本番ビルドを確認します。
+
+```sh
+npm run build
+```
+
+変更をコミットして`main`へpushします。
+
+```sh
+git status
+git add .
+git commit -m "Update site"
+git push origin main
+```
+
 ## ファイル構成
 
 ```text
