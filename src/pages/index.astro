@@ -1,3 +1,8 @@
+---
+const pageTitle = "アイギス・アークってなに？ | アイギス・アーク ガイド";
+const pageDescription = "特殊対ノイズ機関『アイギス・アーク』の世界観や登場人物、関連プロットを紹介する非公式ガイドです。";
+const shareImage = new URL("/assets/img/background.webp", Astro.site);
+---
 <!doctype html>
 <html lang="ja">
   <head>
@@ -9,7 +14,22 @@
     <link rel="manifest" href="/manifest.webmanifest" />
     <meta name="apple-mobile-web-app-title" content="アイギス・アーク" />
     <meta name="theme-color" content="#071321" />
-    <title>アイギス・アークってなに？ | アイギス・アーク ガイド</title>
+    <meta name="description" content={pageDescription} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:image" content={shareImage} />
+    <meta property="og:image:type" content="image/webp" />
+    <meta property="og:image:width" content="2726" />
+    <meta property="og:image:height" content="1532" />
+    <meta property="og:image:alt" content="アイギス・アークのキービジュアル" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={shareImage} />
+    <title>{pageTitle}</title>
     <style>
       :root {
         color-scheme: dark;
@@ -38,7 +58,7 @@
         color: var(--ink);
         background:
           linear-gradient(rgb(7 19 33 / 0.82), rgb(7 19 33 / 0.96)),
-          url("/assets/img/about-academy.JPG") center top / cover fixed,
+          url("/assets/img/background.webp") center top / cover fixed,
           var(--page);
         font-family:
           system-ui,
@@ -394,7 +414,7 @@
         body {
           background:
             linear-gradient(rgb(7 19 33 / 0.8), rgb(7 19 33 / 0.96)),
-            url("/assets/img/about-academy.JPG") center 118px / 210vw auto no-repeat,
+            url("/assets/img/background.webp") center 118px / 210vw auto no-repeat,
             var(--page);
           background-attachment: scroll;
         }
