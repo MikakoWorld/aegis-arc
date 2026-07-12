@@ -1,6 +1,6 @@
 import { defineConfig } from "astro/config";
 
 export default defineConfig({
-  site: "https://aegis-arc.pages.dev",
+  site: "https://aegisarc.pages.dev",
   output: "static",
 });
