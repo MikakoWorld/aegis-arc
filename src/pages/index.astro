@@ -249,6 +249,8 @@ const shareImage = new URL("/assets/img/background.webp", Astro.site);
       }
 
       .plot-card {
+        display: flex;
+        flex-direction: column;
         overflow: hidden;
         border: 1px solid var(--line);
         border-radius: 8px;
@@ -276,6 +278,8 @@ const shareImage = new URL("/assets/img/background.webp", Astro.site);
 
       .plot-card-body {
         display: grid;
+        align-content: start;
+        flex: 1;
         gap: 7px;
         padding: 13px;
       }
@@ -470,13 +474,9 @@ const shareImage = new URL("/assets/img/background.webp", Astro.site);
           line-height: 1.35;
         }
 
-        .plot-card span {
-          display: -webkit-box;
-          overflow: hidden;
+        .plot-card-body > span {
           font-size: 0.7rem;
           line-height: 1.45;
-          -webkit-box-orient: vertical;
-          -webkit-line-clamp: 2;
         }
 
         .zeta-card {
