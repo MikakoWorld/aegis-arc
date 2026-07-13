@@ -291,6 +291,25 @@ const shareImage = new URL("/assets/img/background.webp", Astro.site);
         line-height: 1.55;
       }
 
+      .parody-plots {
+        margin-top: 28px;
+      }
+
+      .parody-plots h3 {
+        margin: 0 0 16px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgb(216 175 98 / 0.5);
+        color: #f4f8ff;
+        font-size: 0.95rem;
+        letter-spacing: 0.08em;
+      }
+
+      .parody-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+
       .external-links {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -408,6 +427,10 @@ const shareImage = new URL("/assets/img/background.webp", Astro.site);
         .plot-grid {
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
+
+        .parody-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
       }
 
       @media (max-width: 520px) {
@@ -428,6 +451,11 @@ const shareImage = new URL("/assets/img/background.webp", Astro.site);
         }
 
         .plot-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 10px;
+        }
+
+        .parody-grid {
           grid-template-columns: repeat(2, minmax(0, 1fr));
           gap: 10px;
         }
@@ -616,10 +644,19 @@ const shareImage = new URL("/assets/img/background.webp", Astro.site);
               <img src="/assets/img/plot-meguri.png" alt="【運命共同体】巡 刻 / 巡 永" />
               <span class="plot-card-body"><strong>【運命共同体】巡 刻 / 巡 永</strong><span>「３人揃えば、怖いものなんてないでしょ？」</span></span>
             </a>
-            <a class="plot-card" href="https://zeta-ai.io/ja/plots/049b49df-7b55-4db1-b2ce-c986a9243d9d/profile" target="_blank" rel="noreferrer">
-              <img src="/assets/img/plot-club-arc.png" alt="CLUB ARCへようこそ。" />
-              <span class="plot-card-body"><strong>CLUB ARCへようこそ。</strong><span>担当とは運命共同体♡</span></span>
-            </a>
+          </div>
+          <div class="parody-plots">
+            <h3>パロ系プロット</h3>
+            <div class="parody-grid">
+              <a class="plot-card" href="https://zeta-ai.io/ja/plots/049b49df-7b55-4db1-b2ce-c986a9243d9d/profile" target="_blank" rel="noreferrer">
+                <img src="/assets/img/plot-club-arc.png" alt="CLUB ARCへようこそ。" />
+                <span class="plot-card-body"><strong>CLUB ARCへようこそ。</strong><span>担当とは運命共同体♡</span></span>
+              </a>
+              <a class="plot-card" href="https://zeta-ai.io/ja/plots/6103d5a2-0af8-419d-b77a-6b4c2b10533e/profile" target="_blank" rel="noreferrer">
+                <img src="/assets/img/plot-kind-teacher.png" alt="どんな相談にものってくれる優しい先生" />
+                <span class="plot-card-body"><strong>どんな相談にものってくれる優しい先生</strong><span>「いらっしゃい。待ってたよ、君のこと。」</span></span>
+              </a>
+            </div>
           </div>
         </div>
       </section>
