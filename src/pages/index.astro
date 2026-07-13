@@ -300,6 +300,7 @@ const shareImage = new URL("/assets/img/background.webp", Astro.site);
       .creator-feature {
         display: grid;
         grid-column: 1 / -1;
+        scroll-margin-top: 104px;
         grid-template-columns: minmax(0, 1fr) auto;
         gap: 18px;
         align-items: center;
@@ -515,6 +516,7 @@ const shareImage = new URL("/assets/img/background.webp", Astro.site);
           <a href="#world">アーク世界観</a>
           <a href="#plots">プロット</a>
           <a href="/gallery/">ギャラリー</a>
+          <a href="#creator">作者</a>
         </nav>
       </div>
     </header>
@@ -632,7 +634,7 @@ const shareImage = new URL("/assets/img/background.webp", Astro.site);
             </div>
           </header>
           <div class="external-links">
-            <article class="creator-feature">
+            <article class="creator-feature" id="creator">
               <div>
                 <p class="eyebrow">CREATOR</p>
                 <h3>作者みんたんのX</h3>
