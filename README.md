@@ -5,7 +5,76 @@
 ## 主なページ
 
 - `/`: アイギス・アークとzetaの概要、プロットリンク
+- `/gallery/`: キャラクタータグで絞り込める画像ギャラリー
 - `/emblem/`: `base.svg`の単色カラー変更と画像書き出し
+
+## ギャラリーの更新
+
+ギャラリー画像は次のディレクトリで管理します。
+
+```text
+public/assets/img/gallery/
+```
+
+キャラクターごとにディレクトリを分けてください。
+
+```text
+public/assets/img/gallery/
+├── ritsu/
+└── saku/
+```
+
+画像を配置したら、`src/data/gallery.yml` の `items` へデータを追加します。
+
+```yml
+- src: /assets/img/gallery/ritsu/example.jpeg
+  tags: [千景 律]
+  description: 律 3万トーク記念イラスト
+  position: 50% 25%
+```
+
+### 項目
+
+| 項目 | 必須 | 説明 |
+| --- | --- | --- |
+| `src` | はい | `public` から始まる公開URL。`/assets/img/gallery/...` の形で記載します。 |
+| `tags` | はい | キャラクター名の配列。フィルターはこの値から自動生成されます。 |
+| `description` | いいえ | 記念イラストなどの説明。設定した画像の拡大表示でのみ表示されます。 |
+| `position` | いいえ | カード表示時のトリミング位置。省略時は `50% 50%` です。 |
+
+`title` は使用しません。画像の代替テキストは `tags` から自動生成されます。
+
+### 複数タグ
+
+複数のキャラクターが写っている場合は、`tags` に複数指定できます。
+
+```yml
+- src: /assets/img/gallery/pair/example.jpeg
+  tags: [千景 律, 久遠 朔]
+  position: 50% 50%
+```
+
+この画像は「千景 律」と「久遠 朔」のどちらで絞り込んでも表示されます。
+
+### 追加後の確認
+
+```sh
+npm run dev
+```
+
+`http://localhost:4321/gallery/` を開き、次の点を確認します。
+
+- 画像が正しく表示される
+- キャラクタータグで絞り込める
+- サムネイルで人物の顔が見切れていない
+- 画像の拡大表示と前後移動ができる
+- `description` を省略した画像に説明欄が出ない
+
+最後に本番ビルドを確認します。
+
+```sh
+npm run build
+```
 
 ## 技術構成
 
@@ -100,8 +169,12 @@ git push origin main
 │   ├── manifest.webmanifest
 │   └── assets/
 │       └── img/
+│           └── gallery/
 └── src/
-    └── pages/
-        ├── index.astro
-        └── emblem.astro
+    ├── data/
+    │   └── gallery.yml
+    └── pages/
+        ├── index.astro
+        ├── gallery.astro
+        └── emblem.astro
 ```

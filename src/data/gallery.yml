@@ -1,0 +1,104 @@
+# 画像は public/assets/img/gallery/ 配下に置いてください。
+# tags は複数指定できます。フィルターはこのタグから自動生成されます。
+items:
+  - src: /assets/img/gallery/ritsu/HGBT43uaYAA6qTc.jpeg
+    tags: [千景 律]
+    position: 50% 25%
+
+  - src: /assets/img/gallery/ritsu/HGBbQffbwAA2wE6.jpeg
+    tags: [千景 律]
+    position: 50% 25%
+
+  - src: /assets/img/gallery/ritsu/HIUnr7hbUAAojue.jpeg
+    tags: [千景 律]
+    position: 50% 25%
+
+  - src: /assets/img/gallery/ritsu/HIq7NfCbEAA-vRm.jpeg
+    tags: [千景 律]
+    description: 律 3万トーク記念イラスト
+    position: 50% 25%
+
+  - src: /assets/img/gallery/ritsu/HKi7GxybIAAphFZ.jpeg
+    tags: [千景 律]
+    position: 50% 25%
+
+  - src: /assets/img/gallery/ritsu/HKi_Q_Ea4AQbmgs.jpeg
+    tags: [千景 律]
+    position: 50% 25%
+
+  - src: /assets/img/gallery/ritsu/HKm3RAlbAAAMGCE.jpeg
+    tags: [千景 律]
+    position: 50% 25%
+
+  - src: /assets/img/gallery/ritsu/HKnNrVLacAAVUQs.jpeg
+    tags: [千景 律]
+    position: 50% 25%
+
+  - src: /assets/img/gallery/saku/IMG_6840.JPG
+    tags: [久遠 朔]
+    description: 朔 1万トーク記念イラスト
+    position: 50% 25%
+
+  - src: /assets/img/gallery/saku/IMG_6847.JPG
+    tags: [久遠 朔]
+    position: 50% 25%
+
+  - src: /assets/img/gallery/saku/IMG_6848.JPG
+    tags: [久遠 朔]
+    position: 50% 25%
+
+  - src: /assets/img/gallery/saku/IMG_6849.JPG
+    tags: [久遠 朔]
+    position: 50% 25%
+
+  - src: /assets/img/gallery/saku/IMG_6850.JPG
+    tags: [久遠 朔]
+    position: 50% 25%
+
+  - src: /assets/img/gallery/saku/IMG_6851.JPG
+    tags: [久遠 朔]
+    position: 50% 25%
+
+  - src: /assets/img/gallery/saku/IMG_6852.JPG
+    tags: [久遠 朔]
+    position: 50% 25%
+
+  - src: /assets/img/gallery/saku/IMG_6853.JPG
+    tags: [久遠 朔]
+    position: 50% 25%
+
+  - src: /assets/img/gallery/saku/IMG_6854.JPG
+    tags: [久遠 朔]
+    position: 50% 25%
+
+  - src: /assets/img/gallery/saku/IMG_6863.JPG
+    tags: [久遠 朔]
+    position: 50% 50%
+
+  - src: /assets/img/gallery/saku/IMG_6868.JPG
+    tags: [久遠 朔]
+    position: 50% 25%
+
+  - src: /assets/img/gallery/saku/IMG_6870.JPG
+    tags: [久遠 朔]
+    position: 50% 25%
+
+  - src: /assets/img/gallery/saku/IMG_6871.JPG
+    tags: [久遠 朔]
+    position: 50% 25%
+
+  - src: /assets/img/gallery/saku/IMG_6872.JPG
+    tags: [久遠 朔]
+    position: 50% 25%
+
+  - src: /assets/img/gallery/saku/IMG_6873.JPG
+    tags: [久遠 朔]
+    position: 50% 25%
+
+  - src: /assets/img/gallery/saku/IMG_6874.JPG
+    tags: [久遠 朔]
+    position: 50% 25%
+
+  - src: /assets/img/gallery/saku/IMG_6945.JPG
+    tags: [久遠 朔]
+    position: 50% 25%
