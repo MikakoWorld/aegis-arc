@@ -83,6 +83,20 @@
         height: auto;
       }
 
+      .brand a.brand-home,
+      .brand a.brand-home:link,
+      .brand a.brand-home:visited,
+      .brand a.brand-home:hover,
+      .brand a.brand-home:active {
+        color: var(--ink);
+        text-decoration: none;
+      }
+
+      .brand-home:focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+
       h1 {
         margin: 0;
         font-size: clamp(1.18rem, 1rem + 0.35vw, 1.38rem);
@@ -680,8 +694,10 @@
     <main class="app">
       <aside class="controls" aria-label="カスタマイズ設定">
         <div class="brand">
-          <img class="brand-mark" src="/assets/img/only_emblem_black.svg" alt="" />
-          <h1>アイギス・アーク<span class="title-small">エンブレム</span></h1>
+          <a class="brand-home" href="/" aria-label="トップページへ戻る">
+            <img class="brand-mark" src="/assets/img/only_emblem_black.svg" alt="" />
+          </a>
+          <h1><a class="brand-home" href="/">アイギス・アーク</a><span class="title-small">エンブレム</span></h1>
           <p class="meta">SVGカラー、背景、書き出しサイズを調整できます。</p>
           <p class="brand-note">好きな色にして遊んじゃおう。</p>
           <a class="guide-link" href="/"><span aria-hidden="true">←</span><span>アイギス・アーク ガイドへ</span></a>
@@ -928,7 +944,7 @@
           <button id="iosSave" class="button secondary" type="button">iPhone保存</button>
           <button id="reset" class="button secondary wide" type="button">リセット</button>
         </div>
-        <p class="report-link">不具合報告はサイト製作者 <a href="https://x.com/Mimmy_zeta001" target="_blank" rel="noreferrer">X</a> まで</p>
+        <p class="report-link">サイトへのお問い合わせは、みんたんの <a href="https://x.com/minmin_zeta" target="_blank" rel="noreferrer">X</a> まで</p>
       </aside>
 
       <section class="stage-wrap" aria-label="プレビュー">
