@@ -2,9 +2,10 @@
 import { load } from "js-yaml";
 import galleryYaml from "../data/gallery.yml?raw";
 
-const pageTitle = "ギャラリー | アイギス・アーク";
-const pageDescription = "アイギス・アークの世界観や登場人物を集めた非公式ギャラリーです。";
+const pageTitle = "ギャラリー｜アイギス・アーク公式サイト";
+const pageDescription = "アイギス・アークの世界観や登場人物を紹介する公式ギャラリーです。";
 const shareImage = new URL("/assets/img/background.webp", Astro.site);
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 
 type GalleryItem = { src: string; tags: string[]; description?: string; position?: string };
 type GalleryData = { items: GalleryItem[] };
@@ -23,6 +24,7 @@ const tags = [...new Set(galleryItems.flatMap((item) => item.tags))].sort((a, b)
     <link rel="manifest" href="/manifest.webmanifest" />
     <meta name="theme-color" content="#071321" />
     <meta name="description" content={pageDescription} />
+    <link rel="canonical" href={canonicalUrl} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ja_JP" />
     <meta property="og:title" content={pageTitle} />
@@ -30,6 +32,9 @@ const tags = [...new Set(galleryItems.flatMap((item) => item.tags))].sort((a, b)
     <meta property="og:url" content={Astro.url} />
     <meta property="og:image" content={shareImage} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={shareImage} />
     <title>{pageTitle}</title>
     <style>
       :root { color-scheme: dark; --ink:#f4f8ff; --muted:#9fb0c8; --line:rgb(255 255 255 / .14); --panel:rgb(13 26 43 / .82); --page:#071321; --accent:#74d7ff; --gold:#d8af62; --focus:#f4c86a; }

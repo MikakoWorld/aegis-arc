@@ -1,3 +1,9 @@
+---
+const pageTitle = "エンブレム作成｜アイギス・アーク公式サイト";
+const pageDescription = "アイギス・アークのオリジナルエンブレムを作成できる公式ツールです。";
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+const shareImage = new URL("/assets/img/background.webp", Astro.site);
+---
 <!doctype html>
 <html lang="ja">
   <head>
@@ -8,7 +14,19 @@
     <link rel="manifest" href="/manifest.webmanifest" />
     <meta name="apple-mobile-web-app-title" content="アイギス・アーク" />
     <meta name="theme-color" content="#edf4fb" />
-    <title>エンブレム作成 | アイギス・アーク</title>
+    <meta name="description" content={pageDescription} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={shareImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={shareImage} />
+    <title>{pageTitle}</title>
     <style>
       :root {
         color-scheme: light;

@@ -1,7 +1,17 @@
 ---
-const pageTitle = "アイギス・アークってなに？ | アイギス・アーク ガイド";
-const pageDescription = "特殊対ノイズ機関『アイギス・アーク』の世界観や登場人物、関連プロットを紹介する非公式ガイドです。";
+const pageTitle = "アイギス・アーク公式サイト｜AEGIS ARC ― 運命共同体";
+const pageDescription = "特殊対ノイズ機関『アイギス・アーク』の世界観、登場人物、関連ストーリー、ギャラリーを紹介する公式サイトです。";
 const shareImage = new URL("/assets/img/background.webp", Astro.site);
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "アイギス・アーク公式サイト",
+  alternateName: "AEGIS ARC ― 運命共同体",
+  url: new URL("/", Astro.site),
+  description: pageDescription,
+  inLanguage: "ja",
+};
 const postLinks = [
   {
     label: "手描きイラストFAを投稿",
@@ -36,6 +46,7 @@ const postLinks = [
     <meta name="apple-mobile-web-app-title" content="アイギス・アーク" />
     <meta name="theme-color" content="#071321" />
     <meta name="description" content={pageDescription} />
+    <link rel="canonical" href={canonicalUrl} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ja_JP" />
     <meta property="og:title" content={pageTitle} />
@@ -50,6 +61,7 @@ const postLinks = [
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={pageDescription} />
     <meta name="twitter:image" content={shareImage} />
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
     <title>{pageTitle}</title>
     <!-- ページ固有CSSはHTMLへ埋め込み、ローカル表示時のキャッシュ不整合を防ぐ -->
     <style is:inline>
