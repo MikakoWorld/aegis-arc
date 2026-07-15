@@ -4,10 +4,12 @@ items:
   - id: AA-G-0001
     src: /assets/img/gallery/jin/HNP9K-jbMAApJZs.jpg
     tags: [辰巳 仁]
+    position: 50% 24%
 
   - id: AA-G-0002
     src: /assets/img/gallery/jin/HNP1qxmbkAAX-Gl.jpg
     tags: [辰巳 仁]
+    position: 78% 50%
 
   - id: AA-G-0003
     src: /assets/img/gallery/saku/HNNZOXqbYAAXBBe.jpg
@@ -72,6 +74,7 @@ items:
   - id: AA-G-0018
     src: /assets/img/gallery/jin/HMy6p5pbIAAwF0n.jpg
     tags: [辰巳 仁]
+    position: 50% 27%
 
   - id: AA-G-0019
     src: /assets/img/gallery/saku/HMyRAWFakAAx3Km.jpg
@@ -83,6 +86,7 @@ items:
   - id: AA-G-0021
     src: /assets/img/gallery/ritsu/HMyPOuvboAASFBi.jpg
     tags: [千景 律]
+    position: 50% 26%
 
   - id: AA-G-0022
     src: /assets/img/gallery/jin/HMyNHxEb0AAtQwI.jpg
@@ -103,6 +107,7 @@ items:
   - id: AA-G-0026
     src: /assets/img/gallery/haru/HMoaqTeaYAIOsbo.jpg
     tags: [朝日 晴]
+    position: 50% 27%
 
   - id: AA-G-0027
     src: /assets/img/gallery/haru/HMoaIdLacAAdGAT.jpg
@@ -127,6 +132,7 @@ items:
   - id: AA-G-0032
     src: /assets/img/gallery/tokitowa/toki/HL-zqMuaQAA3WcJ.jpg
     tags: [巡 刻]
+    position: 50% 18%
 
   - id: AA-G-0033
     src: /assets/img/gallery/jin/HL5pdKwaUAAcqTL.jpg
@@ -135,6 +141,7 @@ items:
   - id: AA-G-0034
     src: /assets/img/gallery/ren/HL3pydkaQAADB43.jpg
     tags: [熾月 廉]
+    position: 50% 24%
 
   - id: AA-G-0035
     src: /assets/img/gallery/ran/HL0lZnCawAE4NIV.jpg
@@ -147,10 +154,12 @@ items:
   - id: AA-G-0037
     src: /assets/img/gallery/ritsu/HLvaWy7aYAA-NPz.jpg
     tags: [千景 律]
+    position: 50% 25%
 
   - id: AA-G-0038
     src: /assets/img/gallery/saku/HLvOK3yaUAABE3x.jpg
     tags: [久遠 朔]
+    position: 50% 26%
 
   - id: AA-G-0039
     src: /assets/img/gallery/saku/HLt9UycbMAAPh17.jpg
@@ -167,6 +176,7 @@ items:
   - id: AA-G-0042
     src: /assets/img/gallery/ren/HLp8qwWawAAzPPD.jpg
     tags: [熾月 廉]
+    position: 50% 22%
 
   - id: AA-G-0043
     src: /assets/img/gallery/saku/HLkmge3XgAAke6W.jpg
@@ -790,4 +800,3 @@ items:
     tags: [久遠 朔]
     description: 朔 1万トーク記念イラスト
     position: 50% 25%
-
