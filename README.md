@@ -46,7 +46,8 @@ public/assets/img/gallery/
 画像を配置したら、`src/data/gallery.yml` の `items` へデータを追加します。
 
 ```yml
-- src: /assets/img/gallery/ritsu/example.jpeg
+- id: AA-G-0001
+  src: /assets/img/gallery/ritsu/example.jpeg
   tags: [千景 律]
   description: 律 3万トーク記念イラスト
   position: 50% 25%
@@ -56,10 +57,13 @@ public/assets/img/gallery/
 
 | 項目 | 必須 | 説明 |
 | --- | --- | --- |
+| `id` | はい | `AA-G-0001` 形式の固有ID。一度付けたIDは並べ替えても変更しません。 |
 | `src` | はい | `public` から始まる公開URL。`/assets/img/gallery/...` の形で記載します。 |
 | `tags` | はい | キャラクター名の配列。フィルターはこの値から自動生成されます。 |
 | `description` | いいえ | 記念イラストなどの説明。設定した画像の拡大表示でのみ表示されます。 |
 | `position` | いいえ | カード表示時のトリミング位置。省略時は `50% 50%` です。 |
+
+PCでは、ギャラリーカードを `Shift` キーを押しながら右クリックすると、その画像の `id` をクリップボードへコピーできます。タッチ端末ではこの操作は有効になりません。
 
 `title` は使用しません。画像の代替テキストは `tags` から自動生成されます。
 
