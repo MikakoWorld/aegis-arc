@@ -30,6 +30,7 @@ public/assets/img/gallery/
 
 ```text
 public/assets/img/gallery/
+├── haru/
 ├── jin/
 ├── ran/
 ├── ren/
