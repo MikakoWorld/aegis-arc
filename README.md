@@ -10,6 +10,16 @@
 
 ## ギャラリーの更新
 
+### 重複画像のチェック
+
+macOS で次のコマンドを実行すると、ファイル名や保存形式に関係なく、デコード後のピクセルが完全に同じ画像を検出できます。
+
+```sh
+npm run check:duplicate-images
+```
+
+別のフォルダーは `npm run check:duplicate-images -- /path/to/images` で検査できます。
+
 ギャラリー画像は次のディレクトリで管理します。
 
 ```text
@@ -20,9 +30,17 @@ public/assets/img/gallery/
 
 ```text
 public/assets/img/gallery/
+├── jin/
+├── ran/
+├── ren/
 ├── ritsu/
-└── saku/
+├── saku/
+└── tokitowa/
+    ├── toki/
+    └── towa/
 ```
+
+`tokitowa/` は双子キャラクター「巡 刻・巡 永」の共通フォルダーです。刻の単独画像は `toki/`、永の単独画像は `towa/`、二人構図の画像は `tokitowa/` 直下に配置します。二人構図は `tags` に `巡 刻` と `巡 永` の両方を設定します。
 
 画像を配置したら、`src/data/gallery.yml` の `items` へデータを追加します。
 
