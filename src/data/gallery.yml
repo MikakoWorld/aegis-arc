@@ -181,14 +181,17 @@ items:
   - id: AA-G-0043
     src: /assets/img/gallery/saku/HLkmge3XgAAke6W.jpg
     tags: [久遠 朔]
+    position: 50% 24%
 
   - id: AA-G-0044
     src: /assets/img/gallery/ren/HLf1ElSaEAEHTcF.jpg
     tags: [熾月 廉]
+    position: 50% 22%
 
   - id: AA-G-0045
     src: /assets/img/gallery/jin/HNP7ZMcbIAI3Nqs.jpg
     tags: [辰巳 仁]
+    position: 50% 22%
 
   - id: AA-G-0046
     src: /assets/img/gallery/jin/HNP7ZMeaYAA6d0y.jpg
@@ -197,14 +200,17 @@ items:
   - id: AA-G-0047
     src: /assets/img/gallery/tokitowa/towa/HMx4U4EbMAAmC4T.jpg
     tags: [巡 永]
+    position: 50% 19%
 
   - id: AA-G-0048
     src: /assets/img/gallery/tokitowa/towa/HMx4U4EaIAAj7cw.jpg
     tags: [巡 永]
+    position: 50% 18%
 
   - id: AA-G-0049
     src: /assets/img/gallery/tokitowa/toki/HMx4MxRbkAEQtJI.jpg
     tags: [巡 刻]
+    position: 50% 20%
 
   - id: AA-G-0050
     src: /assets/img/gallery/tokitowa/toki/HMx4MxAbQAA4nPl.jpg
@@ -213,6 +219,7 @@ items:
   - id: AA-G-0051
     src: /assets/img/gallery/ran/HMwywZDaQAAWgMq.jpg
     tags: [与風 嵐]
+    position: 50% 0%
 
   - id: AA-G-0052
     src: /assets/img/gallery/ran/HMwywY_a8AAjA1M.jpg
@@ -221,14 +228,17 @@ items:
   - id: AA-G-0053
     src: /assets/img/gallery/ritsu/HL_FZ1dagAAsfps.jpg
     tags: [千景 律]
+    position: 50% 20%
 
   - id: AA-G-0054
     src: /assets/img/gallery/ritsu/HL_FZ1gbYAAoGka.jpg
     tags: [千景 律]
+    position: 50% 28%
 
   - id: AA-G-0055
     src: /assets/img/gallery/saku/HLbFZhsbsAAaB79.jpg
     tags: [久遠 朔]
+    position: 50% 22%
 
   - id: AA-G-0056
     src: /assets/img/gallery/saku/HLbFZhtbkAAUcDk.jpg
@@ -257,6 +267,7 @@ items:
   - id: AA-G-0062
     src: /assets/img/gallery/tokitowa/towa/HJ4ovfqbMAAl3iK.jpg
     tags: [巡 永]
+    position: 50% 24%
 
   - id: AA-G-0063
     src: /assets/img/gallery/tokitowa/towa/HI_08IfbcAAtBZj.jpg
@@ -337,14 +348,17 @@ items:
   - id: AA-G-0082
     src: /assets/img/gallery/saku/HIRxNj3bIAAqCSQ.jpg
     tags: [久遠 朔]
+    position: 50% 18%
 
   - id: AA-G-0083
     src: /assets/img/gallery/saku/HGWTXPVbkAALphy.jpg
     tags: [久遠 朔]
+    position: 50% 18%
 
   - id: AA-G-0084
     src: /assets/img/gallery/saku/HGWR47vbcAAIySo.jpg
     tags: [久遠 朔]
+    position: 50% 18%
 
   - id: AA-G-0085
     src: /assets/img/gallery/saku/HGWOfY-aYAAnge2.jpg
@@ -353,10 +367,12 @@ items:
   - id: AA-G-0086
     src: /assets/img/gallery/saku/HGWNWclbwAA47Ji.jpg
     tags: [久遠 朔]
+    position: 50% 15%
 
   - id: AA-G-0087
     src: /assets/img/gallery/saku/HGWJt3Sa8AAyfMX.jpg
     tags: [久遠 朔]
+    position: 50% 25%
 
   - id: AA-G-0088
     src: /assets/img/gallery/saku/HGWGKNDaoAA0yPE.jpg
@@ -365,6 +381,7 @@ items:
   - id: AA-G-0089
     src: /assets/img/gallery/saku/HGWFYVFasAAyBEi.jpg
     tags: [久遠 朔]
+    position: 50% 18%
 
   - id: AA-G-0090
     src: /assets/img/gallery/saku/HGVXUgRawAAWtCL.jpg
@@ -373,6 +390,7 @@ items:
   - id: AA-G-0091
     src: /assets/img/gallery/saku/HG6KVlfaUAAhdGm.jpg
     tags: [久遠 朔]
+    position: 50% 16%
 
   - id: AA-G-0092
     src: /assets/img/gallery/saku/HFngO_EakAEa8xd.jpg
